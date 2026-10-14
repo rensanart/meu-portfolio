@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GigaTracker — Seu Diário de Treino Premium</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6.5 6.5 11 11M18 3v4M3 18v3M10 3h4M3 10v4M17 17l4 4M3 3l4 4M21 3h-3v3M6 21H3v-3M21 21h-4v-4M17 6h1.5a2.5 2.5 0 0 1 2.5 2.5V10" />
+                    </svg>
+                </div>
+                <div>
+                    <h1>GigaTracker</h1>
+                    <p class="subtitle">Seu diário de força & evolução</p>
+                </div>
+            </div>
+            
+            <div class="theme-toggle">
+                <!-- Mostrado apenas se quiser alternar, por padrão mantemos dark para elegância de academia -->
+            </div>
+        </header>
+
+        <!-- TABS FOR NAVIGATION (WORKOUT VS EVOLUTION VS HISTORY) -->
+        <nav class="top-nav glass" style="margin-bottom: 12px;">
+            <button type="button" class="nav-item active" id="nav-workout" onclick="switchTab('workout')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M9 17h6M9 12h6M9 7h6" />
+                </svg>
+                <span>Treino</span>
+            </button>
+            <button type="button" class="nav-item" id="nav-evolution" onclick="switchTab('evolution')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
+                </svg>
+                <span>Evolução</span>
+            </button>
+            <button type="button" class="nav-item" id="nav-history" onclick="switchTab('history')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Histórico</span>
+            </button>
+        </nav>
+
+        <!-- WORKOUT SELECTOR & SUMMARY TOP BAR (v1.3.8) -->
+        <section class="workout-selector-card glass">
+            <h2 class="section-title">Escolha seu treino de hoje:</h2>
+            
+            <!-- Category Tabs -->
+            <div class="category-tabs" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px;">
+                <button type="button" class="btn-category active" id="btn-cat-push" onclick="selectCategory('Push')">
+                    PUSH
+                </button>
+                <button type="button" class="btn-category" id="btn-cat-pull" onclick="selectCategory('Pull')">
+                    PULL
+                </button>
+                <button type="button" class="btn-category" id="btn-cat-legs" onclick="selectCategory('Legs')">
+                    LEGS
+                </button>
+            </div>
+            
+            <!-- Specific Workout Selector & Management Actions -->
+            <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 8px; margin-bottom: 12px; align-items: center;">
+                <select id="workout-select" class="glass" onchange="onWorkoutSelectChange(this.value)" style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 14px; color: var(--text-primary); font-family: var(--font-heading); font-size: 14px; font-weight: 700; outline: none; width: 100%; cursor: pointer; height: 42px;">
+                    <!-- JS will dynamically populate options -->
+                </select>
+                
+                <button type="button" class="btn btn-outline" onclick="openEditWorkoutModal()" style="padding: 0 12px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border-color: rgba(255,255,255,0.1); color: var(--text-secondary);" title="Editar Exercícios do Treino">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                </button>
+                
+                <button type="button" class="btn btn-danger" id="btn-delete-workout" onclick="deleteWorkoutDefinition()" style="padding: 0 12px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #f87171;" title="Excluir Treino">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <button type="button" class="btn btn-outline" onclick="openNewWorkoutModal()" style="flex: 1; height: 38px; border-radius: 10px; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; border-color: rgba(255,255,255,0.1); color: var(--text-secondary);">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Criar Novo Treino
+                </button>
+            </div>
+            
+            <div class="workout-meta-row">
+                <div class="meta-foco" id="workout-focus-text">
+                    <strong>Foco:</strong> Volume de peitoral e progressão de força.
+                </div>
+                <button type="button" class="btn btn-sm btn-success" id="btn-start-workout" onclick="toggleWorkoutTimer()" style="margin-top: 10px; width: 100%; font-family: var(--font-heading); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    <span id="btn-start-text">Começar Treino</span>
+                </button>
+            </div>
+
+            <!-- Global Progress & Timer -->
+            <div class="workout-status-bar">
+                <div class="status-item timer-clickable" onclick="toggleWorkoutTimer()" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <button type="button" class="btn-timer-icon-toggle" id="btn-timer-icon-toggle" style="background: transparent; border: none; color: var(--theme-primary); display: flex; align-items: center; cursor: pointer; padding: 0;">
+                        <!-- Play Icon -->
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" id="play-timer-icon">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        <!-- Pause Icon -->
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" class="hidden" id="pause-timer-icon">
+                            <rect x="6" y="4" width="4" height="16" />
+                            <rect x="14" y="4" width="4" height="16" />
+                        </svg>
+                    </button>
+                    <span id="workout-timer" style="font-size: 15px; font-weight: 700; font-family: var(--font-heading);">00:00:00</span>
+                </div>
+                <div class="status-item">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <span id="workout-progress-text">0/0 séries</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="workout-progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN WORKOUT TAB -->
+        <main class="workout-main-area">
+            
+            <!-- EXERCISES LIST CONTAINER -->
+            <div class="exercises-container" id="exercises-list">
+                <!-- JS will inject exercises here -->
+            </div>
+
+            <!-- WORKOUT ACTIONS -->
+            <div class="workout-actions">
+                <button type="button" class="btn btn-success btn-glow" id="btn-finish" onclick="finishWorkout()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    Concluir Treino
+                </button>
+                <button type="button" class="btn btn-danger btn-outline" id="btn-reset" onclick="resetActiveWorkout()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                    </svg>
+                    Reiniciar Progresso
+                </button>
+            </div>
+        </main>
+
+        <!-- EVOLUTION SECTION (Hidden by default, switched via tab) -->
+        <section class="evolution-area hidden" id="evolution-section">
+            <div class="section-header-row">
+                <h2 class="section-title">Evolução & Calendário</h2>
+                <button type="button" class="btn btn-outline btn-sm" onclick="switchTab('workout')" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px;">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Voltar
+                </button>
+            </div>
+
+            <!-- Calendar Card -->
+            <div class="calendar-card glass" style="padding: 18px; margin-bottom: 16px;">
+                <div class="calendar-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <button type="button" class="btn-cal-nav" onclick="changeMonth(-1)" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-secondary); cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast);">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+                    <h3 id="calendar-month-year" style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-primary); text-transform: capitalize;">Maio de 2026</h3>
+                    <button type="button" class="btn-cal-nav" onclick="changeMonth(1)" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-secondary); cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast);">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Weekdays headers -->
+                <div class="calendar-weekdays" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                </div>
+                
+                <!-- Days grid -->
+                <div class="calendar-days-grid" id="calendar-days-container" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; min-height: 180px;">
+                    <!-- JS will inject days here -->
+                </div>
+
+                <!-- Color legend -->
+                <div class="calendar-legend" style="display: flex; justify-content: center; gap: 14px; margin-top: 16px; font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 12px;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-push-primary); display: inline-block; box-shadow: 0 0 6px var(--color-push-primary);"></span> Push (A)
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-pull-primary); display: inline-block; box-shadow: 0 0 6px var(--color-pull-primary);"></span> Pull (B)
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-legs-primary); display: inline-block; box-shadow: 0 0 6px var(--color-legs-primary);"></span> Legs (C)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalhes do Dia Clicado no Calendário (v1.3.2) -->
+            <div class="day-details-card glass hidden" id="calendar-day-details-card" style="padding: 18px; margin-bottom: 16px; border-left: 3px solid var(--theme-primary); transition: all var(--transition-normal);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                    <h3 id="calendar-day-details-title" style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--text-primary);">Treinos no dia</h3>
+                    <button type="button" onclick="closeCalendarDayDetails()" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-secondary); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all var(--transition-fast);">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="calendar-day-details-content" style="display: flex; flex-direction: column; gap: 10px;">
+                    <!-- JS will inject the day's workouts here -->
+                </div>
+            </div>
+
+            <!-- Body Weight Tracker Card -->
+            <div class="weight-tracker-card glass" style="padding: 18px; margin-bottom: 16px;">
+                <h3 class="section-title" style="margin-bottom: 12px; font-size: 13px; color: var(--text-secondary);">Registrar Peso & Evolução</h3>
+                
+                <div class="weight-input-row" style="display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-bottom: 10px;">
+                    <div class="weight-input-group" style="width: 100%; display: flex; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 14px; transition: border-color var(--transition-fast);">
+                        <input type="number" step="0.1" id="body-weight-input" placeholder="Peso corporal (ex: 82.4)" style="background: transparent; border: none; outline: none; color: var(--text-primary); font-family: var(--font-heading); font-size: 14px; font-weight: 600; width: 100%;">
+                        <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); margin-left: 6px;">kg</span>
+                    </div>
+                    <button type="button" class="btn btn-success btn-sm" onclick="logBodyWeight()" style="padding: 0 18px; height: 42px; border-radius: 10px;">Salvar</button>
+                </div>
+                <div class="weight-note-row" style="margin-bottom: 18px;">
+                    <input type="text" id="body-weight-note" placeholder="Nota (ex: Em jejum, braço 39cm...)" style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 14px; color: var(--text-primary); font-family: var(--font-body); font-size: 12px; outline: none; width: 100%; transition: border-color var(--transition-fast);">
+                </div>
+
+                <!-- Weight History Log -->
+                <div class="weight-history-section" style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+                    <h4 style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Seu Histórico de Pesagens</h4>
+                    <div class="weight-log-list" id="weight-log-container" style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto; padding-right: 4px;">
+                        <!-- JS will inject logs here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORY SECTION (Hidden by default, switched via tab) -->
+        <section class="history-area hidden" id="history-section">
+            <div class="section-header-row" style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <h2 class="section-title" style="margin-bottom: 0;">Histórico</h2>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add-past-workout" onclick="togglePastWorkoutForm(true)" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; font-weight: 700;">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        Lançar Antigo
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-export-backup" onclick="exportBackup()" style="font-weight: 700; border-color: rgba(255, 255, 255, 0.1); color: var(--text-secondary);" title="Exportar Backup dos Dados">
+                        Exportar
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-import-backup" onclick="importBackup()" style="font-weight: 700; border-color: rgba(255, 255, 255, 0.1); color: var(--text-secondary);" title="Importar Backup dos Dados">
+                        Importar
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" id="btn-clear-history" onclick="clearAllHistory()">
+                        Limpar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form Card para Lançar Treino Passado (retroativo) -->
+            <div class="past-workout-card glass hidden" id="past-workout-form-card" style="padding: 18px; margin-bottom: 16px;">
+                <h3 class="section-title" style="margin-bottom: 14px; font-size: 14px; color: var(--text-secondary);">Lançar Treino Passado</h3>
+                
+                <!-- Treino selector (v1.3.8) -->
+                <div style="margin-bottom: 14px;">
+                    <label for="past-workout-select" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Qual treino você realizou?</label>
+                    <select id="past-workout-select" class="glass" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 14px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; cursor: pointer; height: 42px;">
+                        <!-- JS will dynamically populate dynamic optgroups/options -->
+                    </select>
+                </div>
+
+                <!-- Date & Duration Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+                    <div>
+                        <label for="past-workout-date" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Data do Treino</label>
+                        <input type="date" id="past-workout-date" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+                    <div>
+                        <label for="past-workout-duration" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Duração (min)</label>
+                        <input type="number" id="past-workout-duration" placeholder="Ex: 50" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+                </div>
+
+                <!-- Notes free field -->
+                <div style="margin-bottom: 16px;">
+                    <label for="past-workout-notes" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Notas Pessoais (Opcional)</label>
+                    <textarea id="past-workout-notes" placeholder="Ex: Treinei sem o celular. Treino completo com cargas normais." rows="2" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 12px; color: var(--text-primary); font-family: var(--font-body); font-size: 12px; width: 100%; outline: none; resize: none; transition: border-color var(--transition-fast);"></textarea>
+                </div>
+
+                <!-- Action buttons -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button type="button" class="btn btn-outline btn-sm" onclick="togglePastWorkoutForm(false)" style="height: 38px;">Cancelar</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="savePastWorkoutRecord()" style="height: 38px; font-weight: 700;">Salvar Treino</button>
+                </div>
+            </div>
+
+            <!-- Banner para retornar ao treino (UX) -->
+            <div class="back-workout-banner" style="margin-bottom: 16px;">
+                <button type="button" class="btn btn-outline btn-sm" onclick="switchTab('workout')" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; padding: 10px 14px; font-family: var(--font-heading); font-weight: 700;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Voltar para o Treino Ativo
+                </button>
+            </div>
+
+            <div class="history-list" id="history-list-container">
+                <!-- JS will inject completed workouts here -->
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 8v4l3 3" />
+                    </svg>
+                    <p>Nenhum treino salvo no histórico ainda. Complete seu primeiro treino!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FLOATING REST TIMER WIDGET -->
+        <div class="rest-timer-widget hidden" id="rest-timer-container">
+            <div class="timer-overlay-content">
+                <div class="timer-circular-progress">
+                    <svg viewBox="0 0 100 100" class="svg-timer">
+                        <circle cx="50" cy="50" r="45" class="timer-track" />
+                        <circle cx="50" cy="50" r="45" class="timer-fill" id="timer-progress-fill" />
+                    </svg>
+                    <div class="timer-number-display" id="rest-time-display">60s</div>
+                </div>
+                
+                <div class="timer-controls">
+                    <div class="timer-info-text">Descanso Ativo</div>
+                    <div class="timer-adjust-row">
+                        <button type="button" class="btn-adjust" onclick="adjustRestTimer(-15)">-15s</button>
+                        <button type="button" class="btn-adjust" onclick="adjustRestTimer(15)">+15s</button>
+                    </div>
+                    <div class="timer-preset-row">
+                        <button type="button" class="btn-preset" onclick="startRestTimer(30)">30s</button>
+                        <button type="button" class="btn-preset active" id="btn-preset-60" onclick="startRestTimer(60)">60s</button>
+                        <button type="button" class="btn-preset" onclick="startRestTimer(90)">90s</button>
+                        <button type="button" class="btn-preset" onclick="startRestTimer(120)">2min</button>
+                    </div>
+                    
+                    <div class="timer-bottom-buttons">
+                        <button type="button" class="btn-sound-toggle" id="btn-sound" onclick="toggleSound()">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" id="sound-icon-on">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+                            </svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" class="hidden" id="sound-icon-off">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                <line x1="23" y1="9" x2="17" y2="15" />
+                                <line x1="17" y1="9" x2="23" y2="15" />
+                            </svg>
+                            <span>Bipe Ativo</span>
+                        </button>
+                        <button type="button" class="btn-skip" onclick="skipRestTimer()">Pular</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORT / SUMMARY MODAL -->
+        <div class="modal-backdrop hidden" id="report-modal">
+            <div class="modal-card glass">
+                <div class="modal-header">
+                    <div class="icon-trophy">
+                        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                            <path d="M4 22h16" />
+                            <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+                            <path d="M12 2a6 6 0 0 1 6 6v1c0 2.2-1.8 4-4 4h-4a4 4 0 0 1-4-4V8a6 6 0 0 1 6-6z" />
+                        </svg>
+                    </div>
+                    <h3>Treino Concluído!</h3>
+                    <p id="report-date-text">Quarta-feira, 27 de Maio de 2026</p>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Quick stats -->
+                    <div class="quick-stats-grid">
+                        <div class="stat-box">
+                            <span class="value" id="stat-workout-name">Treino A</span>
+                            <span class="label">Divisão</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="value" id="stat-duration">45m</span>
+                            <span class="label">Tempo</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="value" id="stat-sets">28/31</span>
+                            <span class="label">Séries Feitas</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="value" id="stat-volume">1.240 kg</span>
+                            <span class="label">Volume Est.</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Formatted Report Area -->
+                    <div class="formatted-report-container">
+                        <div class="report-title-row">
+                            <span>Resumo Copiável</span>
+                            <button type="button" class="btn-copy" id="btn-copy-report" onclick="copyReportToClipboard()">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" id="copy-icon-ready">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                </svg>
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="hidden" id="copy-icon-success">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                <span id="copy-btn-text">Copiar Relatório</span>
+                            </button>
+                        </div>
+                        <pre class="report-text" id="report-text-pre"></pre>
+                    </div>
+
+                    <!-- Custom Workout Date (v1.3.1) -->
+                    <div style="margin-top: 16px; margin-bottom: 16px; text-align: left;">
+                        <label for="report-workout-date" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Data do Treino (Altere para lançar no passado):</label>
+                        <input type="date" id="report-workout-date" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+
+                    <!-- Personal Notes -->
+                    <div class="notes-container">
+                        <label for="workout-notes">Como você se sentiu nesse treino? (Notas pessoais)</label>
+                        <textarea id="workout-notes" placeholder="Ex: Aumentei carga no supino reto, senti um leve desconforto no tríceps corda no final..." rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeReportModal(false)">Voltar e Ajustar</button>
+                    <button type="button" class="btn btn-success" onclick="closeReportModal(true)">Salvar no Histórico</button>
+                </div>
+            </div>
+    </div>
+
+    <!-- EDIT HISTORY RECORD MODAL (v1.3.4) -->
+    <div class="modal-backdrop hidden" id="edit-history-modal">
+        <div class="modal-card glass">
+            <div class="modal-header">
+                <h3>Editar Registro de Treino</h3>
+                <p>Corrija os dados da sessão selecionada</p>
+            </div>
+            
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto; padding-right: 4px;">
+                <input type="hidden" id="edit-workout-id">
+                
+                <!-- Date & Duration -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; text-align: left;">
+                    <div>
+                        <label for="edit-workout-date" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Data do Treino</label>
+                        <input type="date" id="edit-workout-date" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+                    <div>
+                        <label for="edit-workout-duration" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Duração (min)</label>
+                        <input type="number" id="edit-workout-duration" placeholder="Ex: 50" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div style="margin-bottom: 14px; text-align: left;">
+                    <label for="edit-workout-notes" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Notas Pessoais</label>
+                    <textarea id="edit-workout-notes" placeholder="Notas sobre o treino..." rows="2" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 12px; color: var(--text-primary); font-family: var(--font-body); font-size: 12px; width: 100%; outline: none; resize: none; transition: border-color var(--transition-fast);"></textarea>
+                </div>
+
+                <!-- Body Weight -->
+                <div style="margin-bottom: 16px; text-align: left;">
+                    <label for="edit-workout-weight" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Peso Corporal Registrado (kg)</label>
+                    <input type="number" step="0.1" id="edit-workout-weight" placeholder="Ex: 80.5" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                </div>
+
+                <!-- Exercises & Weights list -->
+                <div style="border-top: 1px solid var(--border-color); padding-top: 14px; text-align: left;">
+                    <h4 style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase;">Exercícios & Cargas</h4>
+                    <div id="edit-workout-exercises-container" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- JS will inject edit inputs here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeEditHistoryModal()">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="saveEditedHistoryRecord()">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MANAGE WORKOUT DEFINITION MODAL (v1.3.8) -->
+    <div class="modal-backdrop hidden" id="manage-workout-modal">
+        <div class="modal-card glass" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="manage-workout-modal-title">Editar Estrutura do Treino</h3>
+                <p id="manage-workout-modal-subtitle">Adicione ou remova exercícios deste treino</p>
+            </div>
+            
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto; padding-right: 4px; text-align: left;">
+                <input type="hidden" id="manage-workout-id">
+                
+                <!-- Nome & Foco & Categoria -->
+                <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px;">
+                    <div>
+                        <label for="manage-workout-name" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Nome do Treino</label>
+                        <input type="text" id="manage-workout-name" placeholder="Ex: PUSH B" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+                    <div>
+                        <label for="manage-workout-focus" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Foco do Treino</label>
+                        <input type="text" id="manage-workout-focus" placeholder="Ex: Progressão em peito e ombros" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+                    <div id="manage-workout-category-container">
+                        <label for="manage-workout-category" style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px;">Categoria</label>
+                        <select id="manage-workout-category" class="glass" style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; color: var(--text-primary); font-family: var(--font-heading); font-size: 13px; font-weight: 600; width: 100%; outline: none; cursor: pointer; height: 42px;">
+                            <option value="Push">Push</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Legs">Legs</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Exercises list configuration -->
+                <div style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px;">
+                        <h4 style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin: 0;">Exercícios</h4>
+                        <button type="button" class="btn btn-sm btn-outline" onclick="addExerciseFieldToModal()" style="font-size: 11px; padding: 6px 12px; border-radius: 8px; display: flex; align-items: center; gap: 4px; font-weight: 700; border-color: rgba(255,255,255,0.1); color: var(--text-secondary);">
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            Adicionar Exercício
+                        </button>
+                    </div>
+                    
+                    <div id="manage-workout-exercises-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                        <!-- JS will inject exercise configurations here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeManageWorkoutModal()">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="saveManageWorkoutModal()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Principal -->
+    <script src="app.js"></script>
+</body>
+</html>
