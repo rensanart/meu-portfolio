@@ -9,7 +9,7 @@
 // ==============================================================================
 
 (function () {
-  const GA_MEASUREMENT_ID = 'G-SEU_ID_AQUI';
+  const GA_MEASUREMENT_ID = 'G-GETJRG2BZR';
 
   // Se o ID ainda não foi configurado, não envia eventos de teste
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-SEU_ID_AQUI') {
