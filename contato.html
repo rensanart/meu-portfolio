@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato | Renan W. Santana (Ren-San)</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon-r.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER COM LOGO ANIMADO NO LUGAR DO NOME -->
+  <header class="header">
+    <div class="header-container">
+      
+      <a href="index.html" class="header-logo-link" aria-label="Renan W. Santana (Ren-San) Home">
+        <img src="assets/LOGOR_animated_negative.svg" alt="Logo R Animado" class="header-logo-r">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html#projetos" class="nav-link">Projetos</a>
+        <a href="index.html#sobre" class="nav-link">Sobre</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="social-links">
+        <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+        <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+        <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PÁGINA DE CONTATO COM FORMULÁRIO MINIMALISTA CONECTADO AO GMAIL -->
+  <main class="contact-page-container">
+
+    <!-- BARRA INFORMATIVA SUPERIOR (ESTILO MATHI MÜLLER) -->
+    <div class="contact-info-top">
+      <div class="info-row">
+        <span class="info-badge">Brasil</span>
+        <span class="info-badge">2026</span>
+      </div>
+
+      <div class="info-row">
+        <a href="mailto:rennsant.design@gmail.com" class="info-badge" style="text-decoration: none;">rennsant.design@gmail.com</a>
+        <a href="https://wa.me/5519981929803" target="_blank" class="info-badge" style="text-decoration: none;">+55 (19) 98192-9803</a>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO DE CONTATO INTEGRADO COM CAMPO TELEFONE/WHATSAPP -->
+    <form class="contact-form" id="portfolio-contact-form" action="https://api.web3forms.com/submit" method="POST">
+      
+      <!-- CONFIGURAÇÃO DO DESTINATÁRIO -->
+      <input type="hidden" name="access_key" value="03db5d5f-bc16-4318-8f83-e8ec434dddd0">
+      <input type="hidden" name="subject" value="Nova mensagem enviada pelo seu Portfólio - Renan W. Santana (Ren-San)">
+      <input type="hidden" name="from_name" value="Portfólio Renan W. Santana (Ren-San)">
+      <input type="hidden" name="to_email" value="rennsant.design@gmail.com">
+
+      <!-- NOME E SOBRENOME (SIDE BY SIDE) -->
+      <div class="form-grid-2">
+        <div class="form-group">
+          <span class="form-label-badge">Nome</span>
+          <input type="text" name="nome" class="form-input-line" placeholder="Seu nome" required>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label-badge">Sobrenome</span>
+          <input type="text" name="sobrenome" class="form-input-line" placeholder="Seu sobrenome">
+        </div>
+      </div>
+
+      <!-- EMAIL E TELEFONE / WHATSAPP (SIDE BY SIDE) -->
+      <div class="form-grid-2">
+        <div class="form-group">
+          <span class="form-label-badge">E-mail *</span>
+          <input type="email" name="email" class="form-input-line" placeholder="seuemail@exemplo.com" required>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label-badge">Telefone / WhatsApp</span>
+          <input type="tel" name="telefone" class="form-input-line" placeholder="(19) 99999-9999">
+        </div>
+      </div>
+
+      <!-- MENSAGEM -->
+      <div class="form-group">
+        <span class="form-label-badge">Mensagem</span>
+        <textarea name="mensagem" class="form-input-line" rows="3" placeholder="Escreva sua mensagem aqui..." required></textarea>
+      </div>
+
+      <!-- BOTÃO ENVIAR PRETO E RETO -->
+      <button type="submit" class="btn-submit-pill">Enviar</button>
+
+    </form>
+
+    <!-- INICIAIS DAS REDES SOCIAIS IGUAL À HOME (Be, Ig, In) -->
+    <div class="contact-page-socials">
+      <a href="https://www.behance.net/rennsant" target="_blank" class="info-badge" style="text-decoration: none; padding: 10px 22px;">Be</a>
+      <a href="https://www.instagram.com/rensanart/" target="_blank" class="info-badge" style="text-decoration: none; padding: 10px 22px;">Ig</a>
+      <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" class="info-badge" style="text-decoration: none; padding: 10px 22px;">In</a>
+    </div>
+
+  </main>
+
+  <!-- RODAPÉ COM LOGO ESTÁTICO DO FRAME 5 NO LADO ESQUERDO -->
+  <footer class="footer">
+    <div class="footer-container">
+      
+      <div class="footer-logo-left">
+        <a href="index.html" aria-label="REN Logo Frame 5">
+          <img src="assets/logo-r.svg" alt="R Logo" class="footer-logo-r">
+        </a>
+      </div>
+
+      <div class="footer-right-content">
+        <p>© <span id="year"></span> Renan W. Santana (Ren-San). Todos os direitos reservados.</p>
+        <a href="#" class="back-top">VOLTAR AO TOPO ↑</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

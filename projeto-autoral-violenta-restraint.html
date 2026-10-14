@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contenção | V10L3NT4 | Renan W. Santana (Ren-San)</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon-r.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- HEADER COM LOGO ANIMADO NO LUGAR DO NOME (TEMA ESCURO) -->
+  <header class="header">
+    <div class="header-container">
+      
+      <a href="index.html" class="header-logo-link" aria-label="Renan W. Santana (Ren-San) Home">
+        <img id="ren-header-logo-frame" src="assets/images/1.svg" alt="REN Logo Animado 11 Frames" class="header-ren-animated">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Design</a>
+        <a href="ilustracoes.html" class="nav-link active">Ilustrações</a>
+        <a href="ilustracoes.html#sobre" class="nav-link">Sobre</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="social-links">
+        <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Cara</a>
+        <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+        <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DO PROJETO DE ILUSTRAÇÃO -->
+  <main class="project-detail-container">
+    
+    <a href="ilustracoes.html" class="back-link">← Voltar para Ilustrações</a>
+
+    <!-- 1. TÍTULO E DESCRIÇÃO CENTRALIZADOS -->
+    <header class="project-hero-header">
+      <h1 class="project-detail-title">Contenção</h1>
+      <p class="project-detail-subtitle">V10L3NT4 • Mask Zero</p>
+      <p class="project-summary-text">
+        Obra autoral explorando a personagem V10L3NT4 sob forte tensão visual e narrativa. Utilização de fitas de contenção gráficas, máscara zero e paleta vibrante em magenta e âmbar.
+      </p>
+    </header>
+
+    <!-- 2. ANIMAÇÃO EM VÍDEO & IMAGENS SEQUENCIAIS DO PROJETO -->
+    <section class="project-gallery-grid">
+      <!-- ANIMAÇÃO EM VÍDEO (QUADRADA) -->
+      <div class="gallery-grid-item gallery-grid-full" style="max-width: 800px; margin: 0 auto 30px auto;">
+        <video autoplay muted loop playsinline controls preload="auto" style="width: 100%; border-radius: 8px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <source src="assets/images/autorais/VIOL-MAKS-SQUARE-B.mp4" type="video/mp4">
+          Seu navegador não suporta o formato de vídeo.
+        </video>
+      </div>
+
+      <!-- SEQUÊNCIA DOS 3 PÔSTERES VERTICAIS (TRÍPTICO) -->
+      <div class="gallery-sequence-row gallery-sequence-3" style="margin-bottom: 30px;">
+        <div class="gallery-grid-item">
+          <img src="assets/images/autorais/VIOL-MAKS-VERT-BO 1.png" alt="V10L3NT4 - Contenção Poster 01">
+        </div>
+        <div class="gallery-grid-item">
+          <img src="assets/images/autorais/VIOL-MAKS-VERT-B 2.png" alt="V10L3NT4 - Contenção Poster 02">
+        </div>
+        <div class="gallery-grid-item">
+          <img src="assets/images/autorais/VIOL-MAKS-VERT-B 3.png" alt="V10L3NT4 - Contenção Poster 03">
+        </div>
+      </div>
+
+      <!-- ARTE ORIGINAL MASK ZERO PRINT -->
+      <div class="gallery-grid-item gallery-grid-full" style="max-width: 900px; margin: 0 auto;">
+        <img src="assets/images/autorais/violenta-restraint-1.png" alt="V10L3NT4 - Contenção Mask Zero Artwork">
+      </div>
+    </section>
+
+    <!-- NAVEGAÇÃO INFERIOR ENTRE ILUSTRAÇÕES -->
+    <nav class="project-bottom-nav">
+      <a href="ilustracoes.html" class="nav-btn">← Voltar para Ilustrações</a>
+      <a href="projeto-autoral-violenta-in-rain.html" class="nav-btn">Próxima Ilustração (V10L3NT4 in Rain) →</a>
+    </nav>
+
+  </main>
+
+  <!-- RODAPÉ MINIMALISTA -->
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Renan W. Santana (Ren-San) ✶ Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- MODAL LIGHTBOX EXPANSÍVEL (CARROSSEL) -->
+  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Fechar">✕</button>
+    <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Anterior">←</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Ampliação de imagem da ilustração">
+      <div id="lightbox-counter" class="lightbox-counter">1 / 1</div>
+    </div>
+    <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Próxima">→</button>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

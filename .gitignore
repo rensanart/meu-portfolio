@@ -1,0 +1,24 @@
+# Arquivos do Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editores e IDEs
+.vscode/
+.idea/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Arquivos de mídia duplicados ou não utilizados (reduz ~100MB no git push)
+assets/VEZZEY DEZ SM 4.mp4
+assets/VEZZEY DEZ SM 2 STORY.mp4
+assets/PERFIL-PIC.gif
+assets/images/autorais/VIOL MAKS SQUARE B.mp4
+assets/images/autorais/EMLY VILOENTAB.mp4
