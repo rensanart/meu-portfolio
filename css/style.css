@@ -48,6 +48,9 @@ body {
   body {
     zoom: 0.8;
   }
+  body.tcc-page {
+    zoom: 1 !important;
+  }
 }
 
 a {
@@ -1482,256 +1485,351 @@ body.dark-theme .footer-social-row a:hover {
 }
 
 /* ==========================================================================
-   TRANSIÇÃO CINEMÁTICA: PUXAR E VIRAR A PÁGINA REVELANDO O AMARELO
+   TRANSIÇÃO COM TURN.JS: FOLHEAMENTO 3D DE TELA INTEIRA
    ========================================================================== */
 
-.page-turn-overlay {
+.turn-transition-overlay {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   z-index: 999999;
+  background: #ffffff;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
+  overflow: hidden;
 }
 
-.page-turn-overlay.active {
+.turn-transition-overlay.active {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
 }
 
-/* Camada Amarela Revelada por Baixo (#eec854) */
-.turn-yellow-reveal {
-  position: absolute;
-  inset: 0;
-  background-color: #eec854;
-  clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%);
+.turn-transition-book {
+  width: 100vw;
+  height: 100vh;
+}
+
+.turn-transition-book .page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.turn-trans-page1 {
+  background: #ffffff;
+}
+
+.turn-trans-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  background: #ffffff;
+  color: #111111;
+}
+
+.turn-trans-page2 {
+  background: #eec854;
+}
+
+.turn-trans-yellow {
+  width: 100%;
+  height: 100%;
+  background: #eec854;
+  color: #111111;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 40px;
 }
 
-.page-turn-overlay.active .turn-yellow-reveal {
-  animation: peelRevealSweep 1.05s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+.turn-yellow-spiral {
+  width: 140px;
+  height: 140px;
+  margin-bottom: 25px;
+  animation: spinSpiral 14s linear infinite;
 }
 
-/* Espiral central do Rei de Amarelo */
-.turn-central-spiral {
-  width: 180px;
-  height: 180px;
-  opacity: 0;
-  transform: scale(0.5) rotate(-120deg);
-  transition: opacity 0.4s ease 0.3s, transform 0.75s cubic-bezier(0.2, 0.9, 0.3, 1) 0.3s;
+.turn-yellow-title {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
-.page-turn-overlay.active .turn-central-spiral {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
-.turn-caption {
-  margin-top: 25px;
-  font-family: var(--font-main);
-  font-size: 0.9rem;
-  letter-spacing: 3px;
-  font-weight: 700;
-  color: #111111;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.35s ease 0.45s, transform 0.45s ease 0.45s;
-}
-
-.page-turn-overlay.active .turn-caption {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Aba diagonal que dobra e é puxada (papel antigo com sombra profunda) */
-.turn-page-flap {
-  position: absolute;
-  inset: -60% -60% -60% -60%;
-  width: 220%;
-  height: 220%;
-  background: linear-gradient(
-    135deg,
-    rgba(250, 245, 236, 0) 47%,
-    #dfceae 49.3%,
-    #c5b28e 49.9%,
-    rgba(0, 0, 0, 0.45) 50.6%,
-    rgba(0, 0, 0, 0.15) 52.5%,
-    rgba(0, 0, 0, 0) 56%
-  );
-  transform: translate(50%, 50%) rotate(45deg);
-  pointer-events: none;
-}
-
-.page-turn-overlay.active .turn-page-flap {
-  animation: peelFlapSweep 1.05s cubic-bezier(0.25, 1, 0.35, 1) forwards;
-}
-
-@keyframes peelRevealSweep {
-  0% {
-    clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%);
-  }
-  35% {
-    clip-path: polygon(35% 100%, 100% 35%, 100% 100%, 35% 100%);
-  }
-  70% {
-    clip-path: polygon(-25% 100%, 100% -25%, 100% 100%, -25% 100%);
-  }
-  100% {
-    clip-path: polygon(-60% 160%, 160% -60%, 160% 160%, -60% 160%);
-  }
-}
-
-@keyframes peelFlapSweep {
-  0% {
-    transform: translate(48%, 48%) rotate(45deg);
-  }
-  100% {
-    transform: translate(-65%, -65%) rotate(45deg);
-  }
+.turn-yellow-subtitle {
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: #2b2b2b;
 }
 
 /* ==========================================================================
-   TEMA AMARELO PARA A PÁGINA DO TCC: O REI DE AMARELO (yellow-theme)
+   ÁREA DO PROJETO TCC: O REI DE AMARELO (Amarelo #eec854, Header/Footer Brancos)
    ========================================================================== */
 
-body.yellow-theme {
-  background-color: #eec854 !important;
-  color: #111111 !important;
+.tcc-project-area {
+  background-color: #eec854;
+  color: #111111;
+  width: 100%;
+  padding: 40px 0 80px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-body.yellow-theme ::selection {
+.tcc-project-area ::selection {
   background-color: #111111;
   color: #eec854;
 }
 
-body.yellow-theme .header {
-  background-color: #eec854 !important;
-  border-bottom: 1px solid #111111 !important;
-}
-
-body.yellow-theme .nav-link {
+.tcc-project-area .back-link {
   color: #111111 !important;
+  font-weight: 600;
 }
 
-body.yellow-theme .nav-link:hover,
-body.yellow-theme .nav-link.active {
-  color: #000000 !important;
-}
-
-body.yellow-theme .social-links a {
-  border-color: #111111 !important;
-  color: #111111 !important;
-}
-
-body.yellow-theme .social-links a:hover {
-  background-color: #111111 !important;
-  color: #eec854 !important;
-}
-
-body.yellow-theme .back-link {
-  color: #111111 !important;
-}
-
-body.yellow-theme .back-link:hover {
+.tcc-project-area .back-link:hover {
   text-decoration: underline;
 }
 
-body.yellow-theme .tcc-secret-badge {
+.tcc-project-area .project-detail-title {
+  color: #111111 !important;
+}
+
+.tcc-project-area .project-detail-subtitle {
+  color: #333333 !important;
+}
+
+.tcc-project-area .project-summary-text {
+  color: #1a1a1a !important;
+}
+
+.tcc-project-area .tcc-secret-badge {
   border: 1px solid #111111;
   background: rgba(0, 0, 0, 0.07);
   color: #111111;
 }
 
-body.yellow-theme .tcc-secret-badge svg {
+.tcc-project-area .tcc-secret-badge svg {
   stroke: #111111;
 }
 
-body.yellow-theme .project-detail-title {
-  color: #111111 !important;
-}
-
-body.yellow-theme .project-detail-subtitle {
-  color: #2b2b2b !important;
-}
-
-body.yellow-theme .project-summary-text {
-  color: #1a1a1a !important;
-}
-
-body.yellow-theme .tcc-meta-grid {
+.tcc-project-area .tcc-meta-grid {
   border: 1px solid #111111;
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-body.yellow-theme .tcc-meta-item h4 {
+.tcc-project-area .tcc-meta-item h4 {
   color: #444444;
 }
 
-body.yellow-theme .tcc-meta-item p {
+.tcc-project-area .tcc-meta-item p {
   color: #111111;
   font-weight: 700;
 }
 
-body.yellow-theme .tcc-quote-block {
+.tcc-project-area .tcc-quote-block {
   border-left: 3px solid #111111;
   background: rgba(0, 0, 0, 0.06);
 }
 
-body.yellow-theme .tcc-quote-text {
+.tcc-project-area .tcc-quote-text {
   color: #111111;
 }
 
-body.yellow-theme .tcc-quote-author {
+.tcc-project-area .tcc-quote-author {
   color: #333333;
 }
 
-body.yellow-theme .project-gallery-grid .gallery-grid-item {
+.tcc-project-area .project-gallery-grid .gallery-grid-item {
   border: 1px solid #111111 !important;
   background-color: #0c0c0c !important;
 }
 
-body.yellow-theme .project-bottom-nav {
+.tcc-project-area .project-bottom-nav {
   border-top: 1px solid #111111;
 }
 
-body.yellow-theme .project-bottom-nav .nav-btn {
+.tcc-project-area .project-bottom-nav .nav-btn {
   border: 1px solid #111111;
   color: #111111;
   padding: 8px 16px;
   transition: all 0.25s ease;
 }
 
-body.yellow-theme .project-bottom-nav .nav-btn:hover {
+.tcc-project-area .project-bottom-nav .nav-btn:hover {
   background-color: #111111;
   color: #eec854;
 }
 
-body.yellow-theme .footer {
-  background-color: #eec854 !important;
-  border-top: 1px solid #111111 !important;
-  color: #333333 !important;
+/* ==========================================================================
+   TURN.JS FLIPBOOK (O REI DE AMARELO - TCC)
+   ========================================================================== */
+
+.tcc-flipbook-section {
+  margin: 45px auto 65px;
+  max-width: 1040px;
+  text-align: center;
+  position: relative;
 }
 
-body.yellow-theme .footer-logo-r {
-  filter: none;
+.tcc-flipbook-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto 18px;
+  user-select: none;
 }
 
-body.yellow-theme .footer-social-row a {
-  color: #111111 !important;
+.flipbook {
+  width: 960px;
+  height: 600px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  border-radius: 4px;
 }
 
-body.yellow-theme .footer-social-row a:hover {
-  color: #000000 !important;
+.flipbook .hard {
+  background-color: #111111 !important;
+  color: #eec854 !important;
+  border: 1px solid #222222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.flipbook .hard h2,
+.flipbook .hard h3 {
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: #eec854;
+}
+
+.flipbook .tcc-cover-inside {
+  background-color: #161616 !important;
+  color: #cccccc !important;
+  padding: 50px 40px;
+}
+
+.tcc-cover-inside-text {
+  max-width: 320px;
+  line-height: 1.8;
+  font-size: 0.85rem;
+  color: #888888;
+}
+
+.tcc-cover-inside-text em {
+  color: #eec854;
+  font-style: italic;
+}
+
+.flipbook .page {
+  background-color: #0c0c0c;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.flipbook .page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.flipbook .page-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(4px);
+  color: #eec854;
+  padding: 5px 14px;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  border: 1px solid rgba(238, 200, 84, 0.25);
+  border-radius: 2px;
+}
+
+.tcc-flipbook-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.tcc-book-ctrl-btn {
+  background: #111111;
+  color: #eec854;
+  border: 1px solid #111111;
+  padding: 9px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tcc-book-ctrl-btn:hover {
+  background: #000000;
+  color: #ffffff;
+  transform: scale(1.04);
+}
+
+.tcc-book-ctrl-btn:active {
+  transform: scale(0.96);
+}
+
+.tcc-flip-status {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #111111;
+  min-width: 130px;
+  text-align: center;
+}
+
+.tcc-book-hint {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #2b2b2b;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 1024px) {
+  .flipbook {
+    width: 720px;
+    height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .flipbook {
+    width: 340px;
+    height: 480px;
+  }
 }
 
 /* ==========================================================================
