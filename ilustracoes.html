@@ -258,42 +258,44 @@
         <p class="copyright">&copy; <span id="year"></span> Renan W. Santana (Ren-San) ✶ Todos os direitos reservados.</p>
       </div>
     </div>
+
+    <!-- ==========================================
+         EASTER EGG: PONTA DA ORELHA DOBRADA / PROJETO SECRETO TCC (O REI DE AMARELO)
+         ========================================== -->
+    <aside class="easter-egg-peel" aria-label="Easter egg: Projeto Secreto TCC">
+      <a href="projeto-tcc.html" class="peel-link" title="Descobrir projeto secreto (TCC)">
+        <svg class="page-peel-svg" viewBox="0 0 60 60" aria-hidden="true">
+          <defs>
+            <filter id="tip-shadow" x="-35%" y="-35%" width="170%" height="170%">
+              <feDropShadow dx="-2" dy="-2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.38"/>
+            </filter>
+            <!-- Tom creme de folha de livro antigo -->
+            <linearGradient id="tip-flap-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#c5b28e"/>
+              <stop offset="40%" stop-color="#dfceae"/>
+              <stop offset="85%" stop-color="#f3ead7"/>
+              <stop offset="100%" stop-color="#faf5ec"/>
+            </linearGradient>
+            <!-- Amarelo #eec854 do Rei de Amarelo -->
+            <linearGradient id="tip-yellow-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f8d66e"/>
+              <stop offset="100%" stop-color="#eec854"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Fundo interno revelado: Amarelo #eec854 na quina -->
+          <polygon points="12,60 60,12 60,60" fill="url(#tip-yellow-bg)"/>
+
+          <!-- Espiral preta distorcida à mão (estilo O Rei de Amarelo) -->
+          <path class="peel-spiral" d="M 43,41 Q 44.5,41.5 44,43 Q 43,45 40.5,44 Q 38,42.5 38.5,39.5 Q 39.5,36 43,36.5 Q 47,37.5 46.5,42 Q 46,47 40.5,47.5 Q 35,48 34.5,41 Q 34,34 41,33 Q 49,32 50,41 Q 50.8,47 44,51 Q 38,54 32,49" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Orelha da dobra discreta em tom creme de livro antigo com sombra realista -->
+          <polygon class="peel-flap" points="12,60 60,12 22,22" fill="url(#tip-flap-grad)" filter="url(#tip-shadow)"/>
+          <line x1="12" y1="60" x2="60" y2="12" stroke="rgba(0,0,0,0.18)" stroke-width="0.8"/>
+        </svg>
+      </a>
+    </aside>
   </footer>
-
-  <!-- ==========================================
-       EASTER EGG: CANTO DE PÁGINA DOBRADA / PROJETO SECRETO TCC
-       ========================================== -->
-  <aside class="easter-egg-peel" aria-label="Easter egg: Projeto Secreto TCC">
-    <a href="projeto-tcc.html" class="peel-link" title="Descobrir projeto secreto (TCC)">
-      <span class="peel-tooltip">TCC ✶ PROJETO SECRETO</span>
-      <svg class="page-peel-svg" viewBox="0 0 80 80" aria-hidden="true">
-        <defs>
-          <filter id="peel-shadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="-2" dy="-2" stdDeviation="3.5" flood-color="#000000" flood-opacity="0.45"/>
-          </filter>
-          <linearGradient id="peel-flap-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#b8b8b8"/>
-            <stop offset="35%" stop-color="#e8e8e8"/>
-            <stop offset="100%" stop-color="#ffffff"/>
-          </linearGradient>
-          <linearGradient id="peel-dark-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1c1c1c"/>
-            <stop offset="100%" stop-color="#050505"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Fundo escuro revelado sob a dobra da página -->
-        <polygon points="0,80 80,0 80,80" fill="url(#peel-dark-bg)"/>
-        
-        <!-- Símbolo de espiral misteriosa -->
-        <path class="peel-spiral" d="M 53.20,52.00 L 53.32,52.16 L 53.41,52.35 L 53.48,52.56 L 53.52,52.80 L 53.51,53.05 L 53.47,53.31 L 53.39,53.58 L 53.26,53.84 L 53.09,54.09 L 52.87,54.33 L 52.62,54.54 L 52.32,54.72 L 51.99,54.87 L 51.62,54.98 L 51.24,55.03 L 50.83,55.04 L 50.41,54.99 L 49.99,54.88 L 49.57,54.71 L 49.16,54.48 L 48.77,54.19 L 48.42,53.85 L 48.10,53.44 L 47.83,52.99 L 47.61,52.49 L 47.46,51.96 L 47.37,51.39 L 47.35,50.81 L 47.41,50.21 L 47.55,49.60 L 47.76,49.01 L 48.06,48.43 L 48.44,47.89 L 48.89,47.38 L 49.41,46.92 L 50.00,46.52 L 50.65,46.20 L 51.35,45.95 L 52.08,45.79 L 52.85,45.71 L 53.64,45.74 L 54.43,45.86 L 55.22,46.09 L 55.98,46.42 L 56.71,46.84 L 57.40,47.37 L 58.03,47.98 L 58.58,48.68 L 59.06,49.46 L 59.44,50.30 L 59.72,51.20 L 59.88,52.14 L 59.94,53.11 L 59.87,54.10 L 59.68,55.08 L 59.36,56.05 L 58.92,56.98 L 58.36,57.87 L 57.69,58.69 L 56.91,59.44 L 56.03,60.09 L 55.07,60.64 L 54.03,61.08 L 52.93,61.38 L 51.79,61.55 L 50.61,61.59 L 49.43,61.47 L 48.26,61.21 L 47.11,60.80 L 46.00,60.25 L 44.96,59.56 L 44.00,58.74 L 43.14,57.79 L 42.39,56.74 L 41.77,55.58 L 41.28,54.35 L 40.95,53.04 L 40.78,51.70 L 40.77,50.32 L 40.93,48.94 L 41.26,47.58 L 41.76,46.25 L 42.43,44.98 L 43.25,43.79 L 44.23,42.69 L 45.34,41.71 L 46.58,40.87 L 47.92,40.17 L 49.35,39.64 L 50.86,39.28 L 52.41,39.11 L 53.98,39.12 L 55.56,39.33 L 57.11,39.74 L 58.62,40.33 L 60.06,41.12 L 61.40,42.08 L 62.63,43.20 L 63.73,44.48 L 64.67,45.90 L 65.43,47.44 L 66.01,49.07 L 66.39,50.77 L 66.56,52.52 L 66.52,54.30 L 66.26,56.07 L 65.78,57.82 L 65.09,59.50 L 64.19,61.11 L 63.09,62.60 L 61.81,63.97 L 60.36,65.17 L 58.76,66.20 L 57.04,67.04 L 55.21,67.66 L 53.30,68.06 L 51.34,68.23 L 49.37,68.16 L 47.40,67.84 L 45.46,67.29 L 43.60,66.50 L 41.83,65.48 L 40.19,64.24 L 38.69,62.81 L 37.38,61.19 L 36.26,59.41 L 35.35,57.49 L 34.69,55.46 L 34.27,53.36 L 34.10,51.20 L 34.21,49.02 L 34.57,46.85 L 35.21,44.73 L 36.10,42.69 L 37.24,40.76 L 38.61,38.97 L 40.20,37.34 L 41.99,35.92 L 43.96,34.71" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity="0.95"/>
-        
-        <!-- Aba dobrada da página com sombra -->
-        <polygon class="peel-flap" points="0,80 80,0 20,20" fill="url(#peel-flap-grad)" filter="url(#peel-shadow)"/>
-        <polygon points="0,80 80,0 20,20" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.6"/>
-      </svg>
-    </a>
-  </aside>
 
   <script src="js/script.js"></script>
 </body>

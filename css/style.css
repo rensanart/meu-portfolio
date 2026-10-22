@@ -911,6 +911,8 @@ body.dark-theme .about-photo-waves {
   padding: 40px 30px;
   font-size: 0.85rem;
   color: var(--text-muted);
+  position: relative;
+  overflow: visible;
 }
 
 .footer-container {
@@ -1413,13 +1415,19 @@ body.dark-theme .footer-social-row a:hover {
    EASTER EGG - PÁGINA DOBRADA / PROJETO SECRETO TCC
    ========================================================================== */
 
+/* ==========================================================================
+   EASTER EGG - PÁGINA DOBRADA / PROJETO SECRETO TCC (O REI DE AMARELO)
+/* ==========================================================================
+   EASTER EGG: PÁGINA DOBRADA / PROJETO SECRETO TCC (O REI DE AMARELO)
+   ========================================================================== */
+
 .easter-egg-peel {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
-  width: 65px;
-  height: 65px;
-  z-index: 9999;
+  width: 54px;
+  height: 54px;
+  z-index: 50;
   line-height: 0;
   pointer-events: auto;
 }
@@ -1431,80 +1439,299 @@ body.dark-theme .footer-social-row a:hover {
   height: 100%;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.easter-egg-peel:hover .peel-link {
-  transform: scale(1.22);
-  transform-origin: bottom right;
-}
-
+/* Sem zoom! Apenas flexão sutil e natural de papel ao aproximar o mouse */
 .page-peel-svg {
   width: 100%;
   height: 100%;
   display: block;
   overflow: visible;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: bottom right;
+}
+
+.peel-link:hover .page-peel-svg {
+  transform: translate(-3px, -3px);
+}
+
+.peel-flap {
+  transform-origin: 10px 60px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.peel-link:hover .peel-flap {
+  transform: scale(0.92);
 }
 
 .peel-spiral {
-  transform-origin: 52px 52px;
+  transform-origin: 43px 43px;
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .peel-link:hover .peel-spiral {
-  transform: rotate(180deg) scale(1.1);
-}
-
-.peel-flap {
-  transform-origin: 0px 80px;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.peel-link:hover .peel-flap {
-  transform: scale(0.95);
-}
-
-.peel-tooltip {
-  position: absolute;
-  bottom: 14px;
-  right: calc(100% + 12px);
-  background-color: #0c0c0c;
-  color: #ffffff;
-  font-family: var(--font-main);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateX(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  border: 1px solid #2a2a2a;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.peel-link:hover .peel-tooltip {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* TEMA ESCURO: adaptação da dobra */
-body.dark-theme .peel-tooltip {
-  background-color: #1a1a1a;
-  border-color: #444444;
+  transform: rotate(60deg);
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
   .easter-egg-peel {
-    width: 52px !important;
-    height: 52px !important;
+    width: 46px !important;
+    height: 46px !important;
   }
-  .peel-tooltip {
-    display: none !important;
+}
+
+/* ==========================================================================
+   TRANSIÇÃO CINEMÁTICA: PUXAR E VIRAR A PÁGINA REVELANDO O AMARELO
+   ========================================================================== */
+
+.page-turn-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.page-turn-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+/* Camada Amarela Revelada por Baixo (#eec854) */
+.turn-yellow-reveal {
+  position: absolute;
+  inset: 0;
+  background-color: #eec854;
+  clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.08);
+}
+
+.page-turn-overlay.active .turn-yellow-reveal {
+  animation: peelRevealSweep 1.05s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+}
+
+/* Espiral central do Rei de Amarelo */
+.turn-central-spiral {
+  width: 180px;
+  height: 180px;
+  opacity: 0;
+  transform: scale(0.5) rotate(-120deg);
+  transition: opacity 0.4s ease 0.3s, transform 0.75s cubic-bezier(0.2, 0.9, 0.3, 1) 0.3s;
+}
+
+.page-turn-overlay.active .turn-central-spiral {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.turn-caption {
+  margin-top: 25px;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: #111111;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease 0.45s, transform 0.45s ease 0.45s;
+}
+
+.page-turn-overlay.active .turn-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Aba diagonal que dobra e é puxada (papel antigo com sombra profunda) */
+.turn-page-flap {
+  position: absolute;
+  inset: -60% -60% -60% -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    135deg,
+    rgba(250, 245, 236, 0) 47%,
+    #dfceae 49.3%,
+    #c5b28e 49.9%,
+    rgba(0, 0, 0, 0.45) 50.6%,
+    rgba(0, 0, 0, 0.15) 52.5%,
+    rgba(0, 0, 0, 0) 56%
+  );
+  transform: translate(50%, 50%) rotate(45deg);
+  pointer-events: none;
+}
+
+.page-turn-overlay.active .turn-page-flap {
+  animation: peelFlapSweep 1.05s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+}
+
+@keyframes peelRevealSweep {
+  0% {
+    clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%);
   }
+  35% {
+    clip-path: polygon(35% 100%, 100% 35%, 100% 100%, 35% 100%);
+  }
+  70% {
+    clip-path: polygon(-25% 100%, 100% -25%, 100% 100%, -25% 100%);
+  }
+  100% {
+    clip-path: polygon(-60% 160%, 160% -60%, 160% 160%, -60% 160%);
+  }
+}
+
+@keyframes peelFlapSweep {
+  0% {
+    transform: translate(48%, 48%) rotate(45deg);
+  }
+  100% {
+    transform: translate(-65%, -65%) rotate(45deg);
+  }
+}
+
+/* ==========================================================================
+   TEMA AMARELO PARA A PÁGINA DO TCC: O REI DE AMARELO (yellow-theme)
+   ========================================================================== */
+
+body.yellow-theme {
+  background-color: #eec854 !important;
+  color: #111111 !important;
+}
+
+body.yellow-theme ::selection {
+  background-color: #111111;
+  color: #eec854;
+}
+
+body.yellow-theme .header {
+  background-color: #eec854 !important;
+  border-bottom: 1px solid #111111 !important;
+}
+
+body.yellow-theme .nav-link {
+  color: #111111 !important;
+}
+
+body.yellow-theme .nav-link:hover,
+body.yellow-theme .nav-link.active {
+  color: #000000 !important;
+}
+
+body.yellow-theme .social-links a {
+  border-color: #111111 !important;
+  color: #111111 !important;
+}
+
+body.yellow-theme .social-links a:hover {
+  background-color: #111111 !important;
+  color: #eec854 !important;
+}
+
+body.yellow-theme .back-link {
+  color: #111111 !important;
+}
+
+body.yellow-theme .back-link:hover {
+  text-decoration: underline;
+}
+
+body.yellow-theme .tcc-secret-badge {
+  border: 1px solid #111111;
+  background: rgba(0, 0, 0, 0.07);
+  color: #111111;
+}
+
+body.yellow-theme .tcc-secret-badge svg {
+  stroke: #111111;
+}
+
+body.yellow-theme .project-detail-title {
+  color: #111111 !important;
+}
+
+body.yellow-theme .project-detail-subtitle {
+  color: #2b2b2b !important;
+}
+
+body.yellow-theme .project-summary-text {
+  color: #1a1a1a !important;
+}
+
+body.yellow-theme .tcc-meta-grid {
+  border: 1px solid #111111;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.yellow-theme .tcc-meta-item h4 {
+  color: #444444;
+}
+
+body.yellow-theme .tcc-meta-item p {
+  color: #111111;
+  font-weight: 700;
+}
+
+body.yellow-theme .tcc-quote-block {
+  border-left: 3px solid #111111;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+body.yellow-theme .tcc-quote-text {
+  color: #111111;
+}
+
+body.yellow-theme .tcc-quote-author {
+  color: #333333;
+}
+
+body.yellow-theme .project-gallery-grid .gallery-grid-item {
+  border: 1px solid #111111 !important;
+  background-color: #0c0c0c !important;
+}
+
+body.yellow-theme .project-bottom-nav {
+  border-top: 1px solid #111111;
+}
+
+body.yellow-theme .project-bottom-nav .nav-btn {
+  border: 1px solid #111111;
+  color: #111111;
+  padding: 8px 16px;
+  transition: all 0.25s ease;
+}
+
+body.yellow-theme .project-bottom-nav .nav-btn:hover {
+  background-color: #111111;
+  color: #eec854;
+}
+
+body.yellow-theme .footer {
+  background-color: #eec854 !important;
+  border-top: 1px solid #111111 !important;
+  color: #333333 !important;
+}
+
+body.yellow-theme .footer-logo-r {
+  filter: none;
+}
+
+body.yellow-theme .footer-social-row a {
+  color: #111111 !important;
+}
+
+body.yellow-theme .footer-social-row a:hover {
+  color: #000000 !important;
 }
 
 /* ==========================================================================

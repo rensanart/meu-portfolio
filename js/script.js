@@ -355,4 +355,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // ==========================================
+  // EASTER EGG: TRANSIÇÃO PUXANDO A DOBRA E VIRANDO A PÁGINA
+  // ==========================================
+  const peelLinks = document.querySelectorAll('.easter-egg-peel .peel-link');
+  if (peelLinks.length > 0) {
+    let pageTurnOverlay = document.getElementById('pageTurnOverlay');
+    if (!pageTurnOverlay) {
+      pageTurnOverlay = document.createElement('div');
+      pageTurnOverlay.id = 'pageTurnOverlay';
+      pageTurnOverlay.className = 'page-turn-overlay';
+      pageTurnOverlay.setAttribute('aria-hidden', 'true');
+      pageTurnOverlay.innerHTML = `
+        <div class="turn-yellow-reveal">
+          <svg class="turn-central-spiral" viewBox="0 0 100 100" fill="none" stroke="#111111" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 52,50 C 53,50 54,51 53,52 C 52,54 48,53 48,50 C 48,46 53,45 55,48 C 58,52 55,57 50,57 C 43,57 42,49 45,44 C 49,38 58,38 62,44 C 67,51 63,61 54,63 C 43,65 37,55 40,46 C 44,35 57,33 66,39 C 75,47 72,63 60,68 C 47,73 35,65 34,50 C 33,35 48,27 63,31 C 77,35 83,53 76,68 C 69,82 48,84 34,75 C 21,66 21,44 32,29"/>
+          </svg>
+          <div class="turn-caption">O Rei de Amarelo ✶ TCC</div>
+        </div>
+        <div class="turn-page-flap"></div>
+      `;
+      document.body.appendChild(pageTurnOverlay);
+    }
+
+    peelLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetUrl = link.getAttribute('href') || 'projeto-tcc.html';
+        
+        // Ativa a animação de puxar a dobra através da tela inteira
+        pageTurnOverlay.classList.add('active');
+        pageTurnOverlay.setAttribute('aria-hidden', 'false');
+
+        // Aguarda a virada de página cobrir tudo em amarelo e navega para o TCC
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 980);
+      });
+    });
+
+    // Reset em caso de retorno pelo botão Voltar (bfcache)
+    window.addEventListener('pageshow', () => {
+      if (pageTurnOverlay) {
+        pageTurnOverlay.classList.remove('active');
+        pageTurnOverlay.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
 });
+
