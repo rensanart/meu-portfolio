@@ -260,38 +260,38 @@
     </div>
 
     <!-- ==========================================
-         EASTER EGG: PONTA DA ORELHA DOBRADA / PROJETO SECRETO TCC (O REI DE AMARELO)
+         EASTER EGG: PÁGINA DOBRADA / PROJETO SECRETO TCC (O REI DE AMARELO)
          ========================================== -->
     <aside class="easter-egg-peel" aria-label="Easter egg: Projeto Secreto TCC">
-      <a href="projeto-tcc.html" class="peel-link" title="Descobrir projeto secreto (TCC)">
-        <svg class="page-peel-svg" viewBox="0 0 60 60" aria-hidden="true">
+      <a href="projeto-tcc.html" class="peel-link" title="Puxar página para revelar o Projeto Secreto (TCC)" aria-label="Puxar página para revelar o Projeto Secreto (TCC)">
+        <svg class="page-peel-svg" viewBox="0 0 80 185" width="80" height="185" aria-hidden="true">
           <defs>
-            <filter id="tip-shadow" x="-35%" y="-35%" width="170%" height="170%">
-              <feDropShadow dx="-2" dy="-2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.38"/>
+            <!-- Sombra suave realista do papel dobrado -->
+            <filter id="peel-fold-shadow-il" x="-60%" y="-30%" width="220%" height="180%">
+              <feDropShadow dx="-4" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.28"/>
             </filter>
-            <!-- Tom creme de folha de livro antigo -->
-            <linearGradient id="tip-flap-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#c5b28e"/>
-              <stop offset="40%" stop-color="#dfceae"/>
-              <stop offset="85%" stop-color="#f3ead7"/>
-              <stop offset="100%" stop-color="#faf5ec"/>
-            </linearGradient>
-            <!-- Amarelo #eec854 do Rei de Amarelo -->
-            <linearGradient id="tip-yellow-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <!-- Amarelo do TCC #eec854 -->
+            <linearGradient id="peel-tcc-yellow-il" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f8d66e"/>
               <stop offset="100%" stop-color="#eec854"/>
             </linearGradient>
+            <!-- Verso da página virada (papel branco/creme com profundidade 3D) -->
+            <linearGradient id="peel-paper-grad-il" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#d6cebd"/>
+              <stop offset="20%" stop-color="#e8e2d5"/>
+              <stop offset="60%" stop-color="#faf8f5"/>
+              <stop offset="100%" stop-color="#ffffff"/>
+            </linearGradient>
           </defs>
 
-          <!-- Fundo interno revelado: Amarelo #eec854 na quina -->
-          <polygon points="12,60 60,12 60,60" fill="url(#tip-yellow-bg)"/>
+          <!-- 1. Fundo amarelo revelado no corte da quina -->
+          <polygon points="38,185 80,102 80,185" fill="url(#peel-tcc-yellow-il)"/>
 
-          <!-- Espiral preta distorcida à mão (estilo O Rei de Amarelo) -->
-          <path class="peel-spiral" d="M 43,41 Q 44.5,41.5 44,43 Q 43,45 40.5,44 Q 38,42.5 38.5,39.5 Q 39.5,36 43,36.5 Q 47,37.5 46.5,42 Q 46,47 40.5,47.5 Q 35,48 34.5,41 Q 34,34 41,33 Q 49,32 50,41 Q 50.8,47 44,51 Q 38,54 32,49" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+          <!-- 2. Orelha dobrada / folha curvada para cima -->
+          <path class="peel-flap" d="M 38,185 Q 52,122 74,15 L 80,102 Z" fill="url(#peel-paper-grad-il)" filter="url(#peel-fold-shadow-il)"/>
 
-          <!-- Orelha da dobra discreta em tom creme de livro antigo com sombra realista -->
-          <polygon class="peel-flap" points="12,60 60,12 22,22" fill="url(#tip-flap-grad)" filter="url(#tip-shadow)"/>
-          <line x1="12" y1="60" x2="60" y2="12" stroke="rgba(0,0,0,0.18)" stroke-width="0.8"/>
+          <!-- 3. Vinco da dobra -->
+          <line x1="38" y1="185" x2="80" y2="102" stroke="rgba(0,0,0,0.14)" stroke-width="0.8"/>
         </svg>
       </a>
     </aside>
