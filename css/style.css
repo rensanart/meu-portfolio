@@ -1494,12 +1494,18 @@ body.dark-theme .footer-social-row a:hover {
   width: 100vw;
   height: 100vh;
   z-index: 999999;
-  background: #ffffff;
+  background: #eec854;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition: opacity 0.1s ease, visibility 0.1s ease;
   overflow: hidden;
+}
+
+@media (min-width: 769px) {
+  .turn-transition-overlay {
+    zoom: 1.25;
+  }
 }
 
 .turn-transition-overlay.active {
@@ -1530,9 +1536,28 @@ body.dark-theme .footer-social-row a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px;
+  padding: 50px 60px;
   background: #ffffff;
   color: #111111;
+  box-sizing: border-box;
+}
+
+.turn-page1-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 20px;
+}
+
+.turn-page1-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eeeeee;
+  padding-top: 20px;
+  font-size: 0.8rem;
+  color: #888888;
 }
 
 .turn-trans-page2 {
@@ -1550,6 +1575,7 @@ body.dark-theme .footer-social-row a:hover {
   justify-content: center;
   text-align: center;
   padding: 40px;
+  box-sizing: border-box;
 }
 
 .turn-yellow-spiral {

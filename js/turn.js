@@ -1678,12 +1678,31 @@
           e =
             c.point ||
             i._c.call(this, a.corner, c.opts.turn ? d.opts.elevation : 0),
-          f = i._c2.call(this, a.corner);
+          f = i._c2.call(this, a.corner),
+          W = b.width(),
+          H = b.height(),
+          p2 = e,
+          p3 = f;
+
+        if (a.corner == "br") {
+          p2 = j(W * 0.45, -H * 0.15);
+          p3 = j(-W * 0.25, H * 0.05);
+        } else if (a.corner == "bl") {
+          p2 = j(W * 0.55, -H * 0.15);
+          p3 = j(W * 1.25, H * 0.05);
+        } else if (a.corner == "tr") {
+          p2 = j(W * 0.45, H * 1.15);
+          p3 = j(-W * 0.25, H * 0.95);
+        } else if (a.corner == "tl") {
+          p2 = j(W * 0.55, H * 1.15);
+          p3 = j(W * 1.25, H * 0.95);
+        }
+
         this.trigger("flip").animatef({
           from: 0,
           to: 1,
           frame: function (c) {
-            c = R(e, e, f, f, c);
+            c = R(e, p2, p3, f, c);
             a.x = c.x;
             a.y = c.y;
             i._showFoldedPage.call(b, a);

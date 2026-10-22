@@ -371,11 +371,17 @@ document.addEventListener('DOMContentLoaded', () => {
         <div id="turnTransitionBook" class="turn-transition-book">
           <div class="page turn-trans-page1">
             <div class="turn-trans-inner">
-              <div style="font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;">REN-SAN DESIGN</div>
-              <div style="text-align: center;">
-                <p style="font-size: 1.2rem; letter-spacing: 2px; color: #888888; text-transform: uppercase;">Folheando para o Projeto Secreto...</p>
+              <div class="turn-page1-header">
+                <span style="font-weight: 700; font-size: 0.9rem; letter-spacing: 1.5px;">RENAN W. SANTANA</span>
+                <span style="font-size: 0.78rem; letter-spacing: 1px; color: #888888;">PORTFÓLIO ✶ DESIGN</span>
               </div>
-              <div style="font-size: 0.8rem; color: #999;">&copy; Renan W. Santana ✶ Todos os direitos reservados.</div>
+              <div style="text-align: center;">
+                <p style="font-size: 0.88rem; letter-spacing: 3px; color: #999999; text-transform: uppercase;">Virando para o projeto secreto...</p>
+              </div>
+              <div class="turn-page1-footer">
+                <span>&copy; Renan W. Santana (Ren-San)</span>
+                <span>Pág. 01 / 02</span>
+              </div>
             </div>
           </div>
           <div class="page turn-trans-page2">
