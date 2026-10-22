@@ -370,28 +370,10 @@ document.addEventListener('DOMContentLoaded', () => {
       turnOverlay.innerHTML = `
         <div id="turnTransitionBook" class="turn-transition-book">
           <div class="page turn-trans-page1">
-            <div class="turn-trans-inner">
-              <div class="turn-page1-header">
-                <span style="font-weight: 700; font-size: 0.9rem; letter-spacing: 1.5px;">RENAN W. SANTANA</span>
-                <span style="font-size: 0.78rem; letter-spacing: 1px; color: #888888;">PORTFÓLIO ✶ DESIGN</span>
-              </div>
-              <div style="text-align: center;">
-                <p style="font-size: 0.88rem; letter-spacing: 3px; color: #999999; text-transform: uppercase;">Virando para o projeto secreto...</p>
-              </div>
-              <div class="turn-page1-footer">
-                <span>&copy; Renan W. Santana (Ren-San)</span>
-                <span>Pág. 01 / 02</span>
-              </div>
-            </div>
+            <div class="turn-trans-inner"></div>
           </div>
           <div class="page turn-trans-page2">
-            <div class="turn-trans-yellow">
-              <svg class="turn-yellow-spiral" viewBox="0 0 100 100" fill="none" stroke="#111111" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M 52,50 C 53,50 54,51 53,52 C 52,54 48,53 48,50 C 48,46 53,45 55,48 C 58,52 55,57 50,57 C 43,57 42,49 45,44 C 49,38 58,38 62,44 C 67,51 63,61 54,63 C 43,65 37,55 40,46 C 44,35 57,33 66,39 C 75,47 72,63 60,68 C 47,73 35,65 34,50 C 33,35 48,27 63,31 C 77,35 83,53 76,68 C 69,82 48,84 34,75 C 21,66 21,44 32,29"/>
-              </svg>
-              <h2 class="turn-yellow-title">O REI DE AMARELO</h2>
-              <p class="turn-yellow-subtitle">TRABALHO DE CONCLUSÃO DE CURSO ✶ DESIGN</p>
-            </div>
+            <iframe id="tccTurnIframe" src="projeto-tcc.html" title="Projeto TCC - O Rei de Amarelo" style="width: 100%; height: 100%; border: 0; display: block; pointer-events: none;" tabindex="-1"></iframe>
           </div>
         </div>
       `;
