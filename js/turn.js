@@ -772,6 +772,26 @@
             c.pages[d] && c.pages[d].flip("peel", a, b));
         return this;
       },
+      startDrag: function (corner, evt) {
+        var a = this.data(),
+          page = this.turn("view")[0],
+          pObj = a.pages[page];
+        if (pObj) {
+          var f = pObj.data().f,
+            parentOffset = f.parent.offset(),
+            e = evt.originalEvent && evt.originalEvent.touches ? evt.originalEvent.touches[0] : (evt.touches ? evt.touches[0] : evt),
+            x = (e.pageX || e.clientX || 0) - parentOffset.left,
+            y = (e.pageY || e.clientY || 0) - parentOffset.top;
+          
+          f.corner = { x: x, y: y, corner: corner };
+          f.time = new Date().getTime();
+          a.mouseAction = true;
+          this.turn("update");
+          pObj.trigger("pressed", [f.point]);
+          i._showFoldedPage.call(pObj, f.corner);
+        }
+        return this;
+      },
       _addMotionPage: function () {
         var a = f(this).data().f.opts,
           b = a.turn;

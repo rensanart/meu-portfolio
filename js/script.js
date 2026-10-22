@@ -381,19 +381,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let isTurning = false;
+    let targetUrl = 'projeto-tcc.html';
 
-    peelLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (isTurning) return;
-        isTurning = true;
-        const targetUrl = link.getAttribute('href') || 'projeto-tcc.html';
-
-        if (window.jQuery && window.jQuery.fn.turn) {
-          turnOverlay.classList.add('active');
-          turnOverlay.setAttribute('aria-hidden', 'false');
-
-          const book = window.jQuery('#turnTransitionBook');
+    function initBook() {
+      if (window.jQuery && window.jQuery.fn.turn) {
+        const book = window.jQuery('#turnTransitionBook');
+        if (!book.turn('is')) {
           book.turn({
             width: window.innerWidth,
             height: window.innerHeight,
@@ -401,26 +394,68 @@ document.addEventListener('DOMContentLoaded', () => {
             autoCenter: false,
             gradients: true,
             acceleration: true,
-            duration: 850,
+            duration: 800,
             elevation: 80,
+            cornerSize: 300,
             when: {
-              turned: function(evt, page) {
+              turned: function (evt, page) {
                 if (page === 2) {
                   setTimeout(() => {
                     window.location.href = targetUrl;
-                  }, 200);
+                  }, 120);
+                }
+              },
+              end: function (evt, pageOpts, turned) {
+                if (!turned) {
+                  isTurning = false;
+                  turnOverlay.classList.remove('active');
+                  turnOverlay.setAttribute('aria-hidden', 'true');
                 }
               }
             }
           });
+        }
+        return book;
+      }
+      return null;
+    }
 
-          // Inicia a virada a partir do canto inferior direito
-          setTimeout(() => {
-            book.turn('next');
-          }, 80);
-        } else {
-          // Fallback navegação direta
-          window.location.href = targetUrl;
+    function handleStart(e, link) {
+      if (isTurning) return;
+      targetUrl = link.getAttribute('href') || 'projeto-tcc.html';
+
+      const book = initBook();
+      if (book) {
+        isTurning = true;
+        turnOverlay.classList.add('active');
+        turnOverlay.setAttribute('aria-hidden', 'false');
+
+        // Dispara o início do arrasto no canto inferior direito ("br")
+        book.turn('startDrag', 'br', e);
+      } else {
+        window.location.href = targetUrl;
+      }
+    }
+
+    peelLinks.forEach(link => {
+      // Mousedown (Desktop)
+      link.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        handleStart(e, link);
+      });
+
+      // Touchstart (Mobile / Tablet)
+      link.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        handleStart(e, link);
+      }, { passive: false });
+
+      // Click fallback
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!isTurning) {
+          handleStart(e, link);
         }
       });
     });
@@ -430,9 +465,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (turnOverlay) {
         turnOverlay.classList.remove('active');
         turnOverlay.setAttribute('aria-hidden', 'true');
-        if (window.jQuery && window.jQuery('#turnTransitionBook').data('turn')) {
+        if (window.jQuery && window.jQuery('#turnTransitionBook').turn('is')) {
           window.jQuery('#turnTransitionBook').turn('page', 1);
         }
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.jQuery && window.jQuery('#turnTransitionBook').turn('is')) {
+        window.jQuery('#turnTransitionBook').turn('size', window.innerWidth, window.innerHeight);
       }
     });
   }
