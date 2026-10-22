@@ -1528,12 +1528,23 @@ body.dark-theme .footer-social-row a:hover {
 
 .turn-trans-page1 {
   background: #ffffff;
+  position: relative;
+  overflow: hidden;
 }
 
 .turn-trans-inner {
   width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
   background: #ffffff;
+}
+
+.turn-clone-content {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
 }
 
 .turn-trans-page2 {

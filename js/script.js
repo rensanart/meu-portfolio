@@ -383,6 +383,54 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTurning = false;
     let targetUrl = 'projeto-tcc.html';
 
+    function populateClone() {
+      const inner = turnOverlay.querySelector('.turn-trans-inner');
+      if (!inner) return;
+      inner.innerHTML = '';
+
+      const main = document.querySelector('main');
+      const footer = document.querySelector('.footer');
+      const header = document.querySelector('.header');
+
+      const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+
+      if (main && footer) {
+        const cloneWrap = document.createElement('div');
+        cloneWrap.className = 'turn-clone-content';
+        cloneWrap.style.position = 'absolute';
+        cloneWrap.style.left = '0';
+        cloneWrap.style.width = '100%';
+        cloneWrap.style.pointerEvents = 'none';
+        cloneWrap.style.zoom = bodyZoom;
+
+        const mRect = main.getBoundingClientRect();
+        cloneWrap.style.top = (mRect.top / bodyZoom) + 'px';
+
+        cloneWrap.appendChild(main.cloneNode(true));
+        cloneWrap.appendChild(footer.cloneNode(true));
+
+        const egg = cloneWrap.querySelector('.easter-egg-peel');
+        if (egg) egg.remove();
+
+        inner.appendChild(cloneWrap);
+      }
+
+      if (header) {
+        const hRect = header.getBoundingClientRect();
+        if (hRect.bottom > 0) {
+          const hClone = header.cloneNode(true);
+          hClone.style.position = 'absolute';
+          hClone.style.left = '0';
+          hClone.style.width = '100%';
+          hClone.style.pointerEvents = 'none';
+          hClone.style.zoom = bodyZoom;
+          hClone.style.top = (hRect.top / bodyZoom) + 'px';
+          hClone.style.zIndex = '100';
+          inner.appendChild(hClone);
+        }
+      }
+    }
+
     function initBook() {
       if (window.jQuery && window.jQuery.fn.turn) {
         const book = window.jQuery('#turnTransitionBook');
@@ -410,6 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
                   isTurning = false;
                   turnOverlay.classList.remove('active');
                   turnOverlay.setAttribute('aria-hidden', 'true');
+                  const inner = turnOverlay.querySelector('.turn-trans-inner');
+                  if (inner) inner.innerHTML = '';
                 }
               }
             }
@@ -423,6 +473,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleStart(e, link) {
       if (isTurning) return;
       targetUrl = link.getAttribute('href') || 'projeto-tcc.html';
+
+      // Clona o conteúdo visual atual para a página 1 antes de iniciar o arrasto
+      populateClone();
 
       const book = initBook();
       if (book) {
@@ -465,6 +518,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (turnOverlay) {
         turnOverlay.classList.remove('active');
         turnOverlay.setAttribute('aria-hidden', 'true');
+        const inner = turnOverlay.querySelector('.turn-trans-inner');
+        if (inner) inner.innerHTML = '';
         if (window.jQuery && window.jQuery('#turnTransitionBook').turn('is')) {
           window.jQuery('#turnTransitionBook').turn('page', 1);
         }
@@ -474,6 +529,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
       if (window.jQuery && window.jQuery('#turnTransitionBook').turn('is')) {
         window.jQuery('#turnTransitionBook').turn('size', window.innerWidth, window.innerHeight);
+      }
+      if (turnOverlay && turnOverlay.classList.contains('active')) {
+        populateClone();
       }
     });
   }
