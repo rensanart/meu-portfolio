@@ -124,6 +124,14 @@ ul {
   transition: transform 0.25s ease;
 }
 
+/* Ondas do logo: recolhimento suave no scroll para não cobrir o conteúdo */
+.header-waves-group {
+  transform-origin: 660.95px 107.56px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
 .header-ren-animated:hover {
   transform: scale(1.05);
 }
@@ -1440,12 +1448,12 @@ body.dark-theme .footer-social-row a:hover {
   position: relative;
   width: 100%;
   height: 100%;
-  cursor: grab;
+  cursor: pointer;
   text-decoration: none;
 }
 
 .peel-link:active {
-  cursor: grabbing;
+  cursor: pointer;
 }
 
 .page-peel-svg {
@@ -1479,99 +1487,137 @@ body.dark-theme .footer-social-row a:hover {
 }
 
 /* ==========================================================================
-   TRANSIÇÃO COM TURN.JS: FOLHEAMENTO 3D DE TELA INTEIRA
+   TRANSIÇÃO NATIVA: DOBRA & DESCOLAMENTO DE PÁGINA (PAGE PEEL & CURL)
    ========================================================================== */
 
-.turn-transition-overlay {
+#peelCanvas {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 999999;
-  background: #eec854;
   pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.1s ease, visibility 0.1s ease;
-  overflow: hidden;
+  z-index: 999999;
+  display: none;
+}
+
+#peelCanvas.animating {
+  display: block;
+}
+
+.tcc-project-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffce00;
+  color: #111111;
+  z-index: 999990;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  pointer-events: auto;
 }
 
 @media (min-width: 769px) {
-  .turn-transition-overlay {
+  #peelCanvas,
+  .tcc-project-overlay {
     zoom: 1.25;
   }
 }
 
-.turn-transition-overlay.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: all;
-}
-
-.turn-transition-book {
-  width: 100vw;
-  height: 100vh;
-}
-
-.turn-transition-book .page {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.turn-trans-page1 {
-  background: #ffffff;
-  position: relative;
-  overflow: hidden;
-}
-
-.turn-trans-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.turn-clone-content {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-}
-
-.turn-trans-page2 {
-  background: #eec854;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.turn-trans-page2 iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+.tcc-project-overlay.active {
   display: block;
-  pointer-events: none;
+}
+
+.tcc-turn-container {
+  min-height: 100%;
+  background-color: #ffce00;
+  color: #111111;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ==========================================================================
-   ÁREA DO PROJETO TCC: O REI DE AMARELO (Amarelo #eec854, Header/Footer Brancos)
+   ÁREA DO PROJETO TCC: O REI DE AMARELO (100% Amarelo #ffce00 Total: Header, Main, Footer)
    ========================================================================== */
 
+body.tcc-page {
+  background-color: #ffce00 !important;
+  color: #111111 !important;
+}
+
+body.tcc-page .header,
+.tcc-turn-container .header {
+  position: relative;
+  background-color: #ffce00 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+body.tcc-page .header .nav-link,
+.tcc-turn-container .header .nav-link {
+  color: #111111 !important;
+}
+
+body.tcc-page .header .nav-link:hover,
+.tcc-turn-container .header .nav-link:hover {
+  opacity: 0.65;
+}
+
+body.tcc-page .header .social-links a,
+.tcc-turn-container .header .social-links a {
+  border-color: #111111 !important;
+  color: #111111 !important;
+}
+
+body.tcc-page .header .social-links a:hover,
+.tcc-turn-container .header .social-links a:hover {
+  background-color: #111111 !important;
+  color: #ffce00 !important;
+}
+
 .tcc-project-area {
-  background-color: #eec854;
+  background-color: #ffce00;
   color: #111111;
   width: 100%;
   padding: 40px 0 80px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: none;
+  border-bottom: none;
+}
+
+body.tcc-page .footer,
+.tcc-turn-container .footer {
+  margin-top: auto;
+  background-color: #ffce00 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #111111 !important;
+}
+
+body.tcc-page .footer .footer-logo,
+.tcc-turn-container .footer .footer-logo {
+  color: #111111 !important;
+}
+
+body.tcc-page .footer .footer-role,
+.tcc-turn-container .footer .footer-role,
+body.tcc-page .footer .copyright,
+.tcc-turn-container .footer .copyright {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+body.tcc-page .footer .footer-social-row a,
+.tcc-turn-container .footer .footer-social-row a {
+  color: #111111 !important;
+}
+
+body.tcc-page .footer .footer-social-row a:hover,
+.tcc-turn-container .footer .footer-social-row a:hover {
+  opacity: 0.65;
 }
 
 .tcc-project-area ::selection {
   background-color: #111111;
-  color: #eec854;
+  color: #ffce00;
 }
 
 .tcc-project-area .back-link {
@@ -1593,6 +1639,8 @@ body.dark-theme .footer-social-row a:hover {
 
 .tcc-project-area .project-summary-text {
   color: #1a1a1a !important;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .tcc-project-area .tcc-secret-badge {
@@ -1632,9 +1680,27 @@ body.dark-theme .footer-social-row a:hover {
   color: #333333;
 }
 
+/* FOTOS DO PROJETO: UMA EMBAIXO DA OUTRA (COLUNA ÚNICA) */
+.tcc-project-area .project-gallery-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 36px !important;
+  width: 100% !important;
+  max-width: 900px !important;
+  margin: 40px auto 50px !important;
+}
+
 .tcc-project-area .project-gallery-grid .gallery-grid-item {
+  width: 100% !important;
   border: 1px solid #111111 !important;
-  background-color: #0c0c0c !important;
+  background-color: transparent !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tcc-project-area .project-gallery-grid .gallery-grid-item img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
 }
 
 .tcc-project-area .project-bottom-nav {
@@ -1650,7 +1716,7 @@ body.dark-theme .footer-social-row a:hover {
 
 .tcc-project-area .project-bottom-nav .nav-btn:hover {
   background-color: #111111;
-  color: #eec854;
+  color: #ffce00;
 }
 
 /* ==========================================================================
@@ -1681,7 +1747,7 @@ body.dark-theme .footer-social-row a:hover {
 
 .flipbook .hard {
   background-color: #111111 !important;
-  color: #eec854 !important;
+  color: #ffce00 !important;
   border: 1px solid #222222;
   display: flex;
   flex-direction: column;
@@ -1695,7 +1761,7 @@ body.dark-theme .footer-social-row a:hover {
 .flipbook .hard h3 {
   letter-spacing: 2px;
   margin-bottom: 12px;
-  color: #eec854;
+  color: #ffce00;
 }
 
 .flipbook .tcc-cover-inside {
@@ -1712,7 +1778,7 @@ body.dark-theme .footer-social-row a:hover {
 }
 
 .tcc-cover-inside-text em {
-  color: #eec854;
+  color: #ffce00;
   font-style: italic;
 }
 
@@ -1742,7 +1808,7 @@ body.dark-theme .footer-social-row a:hover {
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.78);
   backdrop-filter: blur(4px);
-  color: #eec854;
+  color: #ffce00;
   padding: 5px 14px;
   font-size: 0.7rem;
   letter-spacing: 1px;
@@ -1762,7 +1828,7 @@ body.dark-theme .footer-social-row a:hover {
 
 .tcc-book-ctrl-btn {
   background: #111111;
-  color: #eec854;
+  color: #ffce00;
   border: 1px solid #111111;
   padding: 9px 20px;
   font-size: 0.78rem;

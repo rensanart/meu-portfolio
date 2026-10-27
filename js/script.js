@@ -357,183 +357,390 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // EASTER EGG: TRANSIÇÃO COM TURN.JS
+  // EASTER EGG: TRANSIÇÃO NATIVA (PAGE PEEL & CURL VIA CANVAS)
+  // ZERO PISCADA, 60 FPS, RESPOSTA NO 1º CLIQUE, 0 DEPENDÊNCIAS
   // ==========================================
   const peelLinks = document.querySelectorAll('.easter-egg-peel .peel-link');
   if (peelLinks.length > 0) {
-    let turnOverlay = document.getElementById('turnTransitionOverlay');
-    if (!turnOverlay) {
-      turnOverlay = document.createElement('div');
-      turnOverlay.id = 'turnTransitionOverlay';
-      turnOverlay.className = 'turn-transition-overlay';
-      turnOverlay.setAttribute('aria-hidden', 'true');
-      turnOverlay.innerHTML = `
-        <div id="turnTransitionBook" class="turn-transition-book">
-          <div class="page turn-trans-page1">
-            <div class="turn-trans-inner"></div>
-          </div>
-          <div class="page turn-trans-page2">
-            <iframe id="tccTurnIframe" src="projeto-tcc.html" title="Projeto TCC - O Rei de Amarelo" style="width: 100%; height: 100%; border: 0; display: block; pointer-events: none;" tabindex="-1"></iframe>
+    const originalPath = window.location.pathname.split('/').pop() || 'index.html';
+    const originalTitle = document.title;
+    const tccTitle = 'O Rei de Amarelo • Design TCC | Renan W. Santana (Ren-San)';
+
+    const tccProjectHTML = `
+      <header class="header">
+        <div class="header-container">
+          <a href="index.html" class="header-logo-link tcc-back-btn" aria-label="Renan W. Santana (Ren-San) Home">
+            <img src="assets/LOGOR_animated_negative.svg" alt="Logo R Animado" class="header-logo-r">
+          </a>
+          <nav class="nav-menu">
+            <a href="index.html" class="nav-link tcc-back-btn">Design</a>
+            <a href="ilustracoes.html" class="nav-link">Ilustrações</a>
+            <a href="index.html#sobre" class="nav-link">Sobre</a>
+            <a href="contato.html" class="nav-link">Contato</a>
+          </nav>
+          <div class="social-links">
+            <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
+            <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+            <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+            <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
           </div>
         </div>
-      `;
-      document.body.appendChild(turnOverlay);
+      </header>
+      <main class="tcc-project-area">
+        <div class="project-detail-container">
+          <a href="index.html" class="back-link tcc-back-btn">← Voltar ao portfólio</a>
+          <header class="project-hero-header">
+            <div class="project-theme-logo-wrapper" style="max-width: 320px;">
+              <img src="assets/Rei de amarelo/LOGO REI DE AMARELO.svg" alt="O Rei de Amarelo Logo" class="project-theme-logo" style="width: 100%; max-width: 320px; height: auto; margin: 0 auto; object-fit: contain;">
+            </div>
+            <p class="project-summary-text">
+              Projeto editorial autoral e Trabalho de Conclusão de Curso (TCC) inspirado na clássica obra de horror cósmico de Robert W. Chambers. O projeto investiga a decadência estética, o fascínio do mistério e o simbolismo sombrio através de uma direção de arte visceral, tipografia gótica experimental e ilustrações autorais que conduzem o leitor ao abismo hipnótico de Carcosa.
+            </p>
+          </header>
+          <section class="project-gallery-grid">
+            <div class="gallery-grid-item gallery-grid-full">
+              <img src="assets/Rei de amarelo/Natureza-morta com livro e caveira dourada.png" alt="O Rei de Amarelo — Edição de Colecionador & Mockup Editorial">
+            </div>
+            <div class="gallery-grid-item gallery-grid-full">
+              <img src="assets/Rei de amarelo/Livro aberto com velas e galho.png" alt="O Rei de Amarelo — Capítulo 1: O Reparador de Reputações">
+            </div>
+            <div class="gallery-grid-item gallery-grid-full">
+              <img src="assets/Rei de amarelo/Seis amarelo fosco no livro de arte.png" alt="O Rei de Amarelo — Capítulo 6: O Paraíso do Profeta">
+            </div>
+            <div class="gallery-grid-item gallery-grid-full">
+              <img src="assets/Rei de amarelo/Livro de arte e velas escultóricas.png" alt="O Rei de Amarelo — Capítulo 10: Rue Barrée">
+            </div>
+            <div class="gallery-grid-item gallery-grid-full">
+              <img src="assets/Rei de amarelo/Livro de arte, velas e carvão.png" alt="O Rei de Amarelo — Conclusão: O Rei em Jambeiro / Fim">
+            </div>
+            <div class="gallery-grid-item gallery-grid-full">
+              <img src="assets/Rei de amarelo/O Rei de Amarelo em ouro.png" alt="O Rei de Amarelo — Key Visual da Máscara Pálida em Ouro">
+            </div>
+          </section>
+          <nav class="project-bottom-nav">
+            <a href="index.html" class="nav-btn tcc-back-btn">← Voltar para o portfólio</a>
+            <a href="contato.html" class="nav-btn">Entre em contato →</a>
+          </nav>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-left">
+            <a href="index.html" class="footer-logo tcc-back-btn" aria-label="Logo Ren-San">
+              <img src="assets/logo-r.svg" alt="R Logo" class="footer-logo-r">
+            </a>
+            <p class="footer-role">Direção de Arte & Design</p>
+          </div>
+          <div class="footer-right">
+            <div class="footer-social-row">
+              <a href="https://cara.app/rensan" target="_blank">Cara ↗</a>
+              <a href="https://www.behance.net/rennsant" target="_blank">Behance ↗</a>
+              <a href="https://www.instagram.com/rensanart/" target="_blank">Instagram ↗</a>
+              <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank">LinkedIn ↗</a>
+            </div>
+            <p class="copyright">&copy; ${new Date().getFullYear()} Renan W. Santana (Ren-San) ✶ Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    `;
+
+    // Cria os elementos no DOM se ainda não existirem
+    let tccOverlay = document.getElementById('tccProjectOverlay');
+    if (!tccOverlay) {
+      tccOverlay = document.createElement('div');
+      tccOverlay.id = 'tccProjectOverlay';
+      tccOverlay.className = 'tcc-project-overlay';
+      tccOverlay.setAttribute('aria-hidden', 'true');
+      tccOverlay.innerHTML = `<div class="tcc-turn-container">${tccProjectHTML}</div>`;
+      document.body.appendChild(tccOverlay);
     }
 
-    let isTurning = false;
-    let targetUrl = 'projeto-tcc.html';
+    let peelCanvas = document.getElementById('peelCanvas');
+    if (!peelCanvas) {
+      peelCanvas = document.createElement('canvas');
+      peelCanvas.id = 'peelCanvas';
+      document.body.appendChild(peelCanvas);
+    }
+    const pctx = peelCanvas.getContext('2d');
 
-    function populateClone() {
-      const inner = turnOverlay.querySelector('.turn-trans-inner');
-      if (!inner) return;
-      inner.innerHTML = '';
-
-      const main = document.querySelector('main');
-      const footer = document.querySelector('.footer');
-      const header = document.querySelector('.header');
-
+    function resizePeelCanvas() {
+      const dpr = window.devicePixelRatio || 1;
       const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+      const w = window.innerWidth / bodyZoom;
+      const h = window.innerHeight / bodyZoom;
+      peelCanvas.width = w * dpr;
+      peelCanvas.height = h * dpr;
+      pctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resizePeelCanvas);
+    resizePeelCanvas();
 
-      if (main && footer) {
-        const cloneWrap = document.createElement('div');
-        cloneWrap.className = 'turn-clone-content';
-        cloneWrap.style.position = 'absolute';
-        cloneWrap.style.left = '0';
-        cloneWrap.style.width = '100%';
-        cloneWrap.style.pointerEvents = 'none';
-        cloneWrap.style.zoom = bodyZoom;
-
-        const mRect = main.getBoundingClientRect();
-        cloneWrap.style.top = (mRect.top / bodyZoom) + 'px';
-
-        cloneWrap.appendChild(main.cloneNode(true));
-        cloneWrap.appendChild(footer.cloneNode(true));
-
-        const egg = cloneWrap.querySelector('.easter-egg-peel');
-        if (egg) egg.remove();
-
-        inner.appendChild(cloneWrap);
-      }
-
-      if (header) {
-        const hRect = header.getBoundingClientRect();
-        if (hRect.bottom > 0) {
-          const hClone = header.cloneNode(true);
-          hClone.style.position = 'absolute';
-          hClone.style.left = '0';
-          hClone.style.width = '100%';
-          hClone.style.pointerEvents = 'none';
-          hClone.style.zoom = bodyZoom;
-          hClone.style.top = (hRect.top / bodyZoom) + 'px';
-          hClone.style.zIndex = '100';
-          inner.appendChild(hClone);
-        }
-      }
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
 
-    function initBook() {
-      if (window.jQuery && window.jQuery.fn.turn) {
-        const book = window.jQuery('#turnTransitionBook');
-        if (!book.turn('is')) {
-          book.turn({
-            width: window.innerWidth,
-            height: window.innerHeight,
-            display: 'single',
-            autoCenter: false,
-            gradients: true,
-            acceleration: true,
-            duration: 800,
-            elevation: 80,
-            cornerSize: 300,
-            when: {
-              turned: function (evt, page) {
-                if (page === 2) {
-                  setTimeout(() => {
-                    window.location.href = targetUrl;
-                  }, 120);
-                }
-              },
-              end: function (evt, pageOpts, turned) {
-                if (!turned) {
-                  isTurning = false;
-                  turnOverlay.classList.remove('active');
-                  turnOverlay.setAttribute('aria-hidden', 'true');
-                  const inner = turnOverlay.querySelector('.turn-trans-inner');
-                  if (inner) inner.innerHTML = '';
-                }
-              }
-            }
-          });
-        }
-        return book;
-      }
-      return null;
+    function renderPeelFrame(progress) {
+      const dpr = window.devicePixelRatio || 1;
+      const W = peelCanvas.width / dpr;
+      const H = peelCanvas.height / dpr;
+      pctx.clearRect(0, 0, W, H);
+
+      if (progress <= 0) return;
+
+      // Canto de partida: C = (W, H) [CANTO INFERIOR DIREITO ONDE FICA A DOBRA]
+      const C = { x: W, y: H };
+
+      // Destino do canto puxado: além do canto superior esquerdo (Top-Left)
+      const targetX = -W * 0.4;
+      const targetY = -H * 0.4;
+
+      const eased = easeInOutCubic(progress);
+      const P = {
+        x: C.x + (targetX - C.x) * eased,
+        y: C.y + (targetY - C.y) * eased
+      };
+
+      const vx = P.x - C.x;
+      const vy = P.y - C.y;
+      const dist = Math.hypot(vx, vy);
+      if (dist < 1) return;
+
+      const nx = vx / dist;
+      const ny = vy / dist;
+
+      const Mx = (C.x + P.x) / 2;
+      const My = (C.y + P.y) / 2;
+
+      const dx = -ny;
+      const dy = nx;
+
+      const diag = Math.hypot(W, H);
+      const lineLen = diag * 3;
+      const L1 = { x: Mx - dx * lineLen, y: My - dy * lineLen };
+      const L2 = { x: Mx + dx * lineLen, y: My + dy * lineLen };
+
+      pctx.save();
+
+      // 1. ÁREA REVELADA EM AMARELO (#ffce00):
+      // Cobre com precisão total o lado inferior direito da dobra
+      pctx.save();
+      pctx.beginPath();
+      pctx.moveTo(L1.x, L1.y);
+      pctx.lineTo(L2.x, L2.y);
+      pctx.lineTo(W + 600, -600);
+      pctx.lineTo(W + 600, H + 600);
+      pctx.lineTo(-600, H + 600);
+      pctx.closePath();
+      pctx.fillStyle = '#ffce00';
+      pctx.fill();
+
+      // 2. SOMBRA PROJETADA DA DOBRA SOBRE A FOLHA AMARELA
+      pctx.beginPath();
+      pctx.moveTo(L1.x, L1.y);
+      pctx.lineTo(L2.x, L2.y);
+      pctx.lineTo(L2.x - nx * 90, L2.y - ny * 90);
+      pctx.lineTo(L1.x - nx * 90, L1.y - ny * 90);
+      pctx.closePath();
+      const shadowGrad = pctx.createLinearGradient(Mx, My, Mx - nx * 90, My - ny * 90);
+      shadowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.55)');
+      shadowGrad.addColorStop(0.2, 'rgba(0, 0, 0, 0.3)');
+      shadowGrad.addColorStop(0.65, 'rgba(0, 0, 0, 0.08)');
+      shadowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      pctx.fillStyle = shadowGrad;
+      pctx.fill();
+      pctx.restore();
+
+      // 3. A FOLHA DOBRADA (FLAP / ROLO DE PAPEL AO LONGO DO VINCO):
+      pctx.save();
+      const curlWidth = Math.min(dist * 0.45, 260);
+      const Pcurl = {
+        x: Mx + nx * curlWidth,
+        y: My + ny * curlWidth
+      };
+
+      pctx.beginPath();
+      pctx.moveTo(L1.x, L1.y);
+      pctx.lineTo(L2.x, L2.y);
+      pctx.lineTo(L2.x + nx * curlWidth, L2.y + ny * curlWidth);
+      pctx.lineTo(L1.x + nx * curlWidth, L1.y + ny * curlWidth);
+      pctx.closePath();
+
+      const rollGrad = pctx.createLinearGradient(Mx, My, Pcurl.x, Pcurl.y);
+      rollGrad.addColorStop(0, '#c4c4c4');
+      rollGrad.addColorStop(0.08, '#ffffff');
+      rollGrad.addColorStop(0.28, '#f7f7f7');
+      rollGrad.addColorStop(0.65, '#e5e5e5');
+      rollGrad.addColorStop(0.9, '#cfcfcf');
+      rollGrad.addColorStop(1, 'rgba(160, 160, 160, 0.2)');
+      pctx.fillStyle = rollGrad;
+      pctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
+      pctx.shadowBlur = 35;
+      pctx.shadowOffsetX = nx * 12;
+      pctx.shadowOffsetY = ny * 12;
+      pctx.fill();
+
+      pctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      pctx.lineWidth = 2.5;
+      pctx.stroke();
+
+      pctx.restore();
+      pctx.restore();
     }
 
-    function handleStart(e, link) {
-      if (isTurning) return;
-      targetUrl = link.getAttribute('href') || 'projeto-tcc.html';
+    let isPeeling = false;
+    let peelAnimId = null;
 
-      // Clona o conteúdo visual atual para a página 1 antes de iniciar o arrasto
-      populateClone();
+    function setCornerVisibility(visible) {
+      const corners = document.querySelectorAll('.easter-egg-peel');
+      corners.forEach(c => {
+        c.style.visibility = visible ? '' : 'hidden';
+      });
+    }
 
-      const book = initBook();
-      if (book) {
-        isTurning = true;
-        turnOverlay.classList.add('active');
-        turnOverlay.setAttribute('aria-hidden', 'false');
+    function runPeelTransition(direction) {
+      if (isPeeling) return;
+      isPeeling = true;
 
-        // Dispara o início do arrasto no canto inferior direito ("br")
-        book.turn('startDrag', 'br', e);
-      } else {
-        window.location.href = targetUrl;
+      resizePeelCanvas();
+      peelCanvas.classList.add('animating');
+      setCornerVisibility(false);
+
+      if (direction === 'backward') {
+        tccOverlay.classList.remove('active');
+        tccOverlay.setAttribute('aria-hidden', 'true');
       }
+
+      const duration = 650;
+      const startTime = performance.now();
+
+      function tick(now) {
+        const elapsed = now - startTime;
+        let progress = Math.min(elapsed / duration, 1);
+        if (direction === 'backward') {
+          progress = 1 - progress;
+        }
+
+        renderPeelFrame(progress);
+
+        if ((direction === 'forward' && progress < 1) || (direction === 'backward' && progress > 0)) {
+          peelAnimId = requestAnimationFrame(tick);
+        } else {
+          isPeeling = false;
+          peelCanvas.classList.remove('animating');
+          pctx.clearRect(0, 0, peelCanvas.width, peelCanvas.height);
+
+          if (direction === 'forward') {
+            tccOverlay.classList.add('active');
+            tccOverlay.setAttribute('aria-hidden', 'false');
+            tccOverlay.scrollTop = 0;
+            try {
+              history.pushState({ page: 'tcc' }, '', 'projeto-tcc.html');
+              document.title = tccTitle;
+            } catch (err) {}
+          } else {
+            setCornerVisibility(true);
+            try {
+              history.pushState(null, '', originalPath);
+              document.title = originalTitle;
+            } catch (err) {}
+          }
+        }
+      }
+
+      peelAnimId = requestAnimationFrame(tick);
     }
 
     peelLinks.forEach(link => {
-      // Mousedown (Desktop)
-      link.addEventListener('mousedown', (e) => {
-        if (e.button !== 0) return;
-        e.preventDefault();
-        handleStart(e, link);
-      });
-
-      // Touchstart (Mobile / Tablet)
-      link.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        handleStart(e, link);
-      }, { passive: false });
-
-      // Click fallback
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        if (!isTurning) {
-          handleStart(e, link);
-        }
+        e.stopPropagation();
+        runPeelTransition('forward');
       });
     });
 
-    window.addEventListener('pageshow', () => {
-      isTurning = false;
-      if (turnOverlay) {
-        turnOverlay.classList.remove('active');
-        turnOverlay.setAttribute('aria-hidden', 'true');
-        const inner = turnOverlay.querySelector('.turn-trans-inner');
-        if (inner) inner.innerHTML = '';
-        if (window.jQuery && window.jQuery('#turnTransitionBook').turn('is')) {
-          window.jQuery('#turnTransitionBook').turn('page', 1);
-        }
+    tccOverlay.addEventListener('click', (e) => {
+      const backBtn = e.target.closest('.tcc-back-btn');
+      if (backBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        runPeelTransition('backward');
       }
     });
 
-    window.addEventListener('resize', () => {
-      if (window.jQuery && window.jQuery('#turnTransitionBook').turn('is')) {
-        window.jQuery('#turnTransitionBook').turn('size', window.innerWidth, window.innerHeight);
-      }
-      if (turnOverlay && turnOverlay.classList.contains('active')) {
-        populateClone();
+    window.addEventListener('popstate', () => {
+      if (tccOverlay.classList.contains('active')) {
+        runPeelTransition('backward');
       }
     });
   }
-});
 
+  // ==========================================
+  // ONDAS DO LOGO R: RECOLHIMENTO E FADE SUAVE NO SCROLL
+  // ==========================================
+  function initHeaderWavesScroll() {
+    const setupWavesScroll = (svgEl) => {
+      const wavesGroup = svgEl.querySelector('.header-waves-group');
+      if (!wavesGroup) return;
+
+      wavesGroup.style.transformOrigin = '660.95px 107.56px';
+
+      let ticking = false;
+      const maxScroll = 120; // 120px de scroll para recolher 100%
+
+      const handleScroll = () => {
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+
+        // Recolhe suavemente em direção ao centro da letra R (de 1.0 a 0.12)
+        const scale = 1 - (progress * 0.88);
+        // Diminui e some suavemente (de 1.0 a 0.0)
+        const opacity = Math.max(0, 1 - progress * 1.15);
+
+        wavesGroup.style.transform = `scale(${scale.toFixed(3)})`;
+        wavesGroup.style.opacity = opacity.toFixed(3);
+        wavesGroup.style.visibility = progress >= 1 ? 'hidden' : 'visible';
+
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(handleScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // Aplica imediatamente caso a página seja recarregada já com scroll
+      handleScroll();
+    };
+
+    // 1. Se o SVG já estiver inline no header
+    const inlineSvg = document.querySelector('.header-logo-link svg.header-logo-r');
+    if (inlineSvg) {
+      setupWavesScroll(inlineSvg);
+      return;
+    }
+
+    // 2. Se for <img>, converte para SVG inline para permitir o controle do grupo de ondas
+    const imgLogo = document.querySelector('.header-logo-link img.header-logo-r');
+    if (imgLogo && imgLogo.src && imgLogo.src.includes('LOGOR_animated_negative.svg')) {
+      fetch(imgLogo.src)
+        .then(res => res.text())
+        .then(svgText => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(svgText, 'image/svg+xml');
+          const svg = doc.querySelector('svg');
+          if (svg) {
+            svg.setAttribute('class', 'header-logo-r');
+            svg.setAttribute('id', 'header-logo-svg');
+            svg.setAttribute('aria-label', 'Logo R Animado');
+            imgLogo.replaceWith(svg);
+            setupWavesScroll(svg);
+          }
+        })
+        .catch(err => console.warn('Não foi possível inlinar o SVG do logo:', err));
+    }
+  }
+
+  initHeaderWavesScroll();
+});
