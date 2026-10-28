@@ -496,6 +496,27 @@ ul {
   grid-template-columns: repeat(5, 1fr);
 }
 
+.gallery-sequence-7 {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.gallery-sequence-8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.gallery-sequence-7 .gallery-grid-item,
+.gallery-sequence-8 .gallery-grid-item {
+  aspect-ratio: 4 / 5;
+}
+
+.gallery-sequence-7 .gallery-grid-item img,
+.gallery-sequence-8 .gallery-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* DUPLA DE STORIES (VÍDEO MOTION + STORY ESTÁTICO LADO A LADO) */
 .gallery-grid-stories-duo {
   display: grid;
@@ -1246,7 +1267,9 @@ body.dark-theme .about-photo-waves {
   .gallery-sequence-row,
   .gallery-sequence-3,
   .gallery-sequence-4,
-  .gallery-sequence-5 {
+  .gallery-sequence-5,
+  .gallery-sequence-7,
+  .gallery-sequence-8 {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 15px;
