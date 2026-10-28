@@ -312,6 +312,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
+  // BOTÕES DE NAVEGAÇÃO DOS CARROSSÉIS HORIZONTAIS
+  // ==========================================
+  document.querySelectorAll('.carousel-arrow-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = btn.getAttribute('data-target');
+      const track = document.getElementById(targetId);
+      if (!track) return;
+      const scrollStep = track.clientWidth * 0.75;
+      if (btn.classList.contains('prev')) {
+        track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ==========================================
   // ENVIO DO FORMULÁRIO DE CONTATO PARA O GMAIL
   // ==========================================
   const contactForm = document.getElementById('portfolio-contact-form');
