@@ -696,15 +696,11 @@ body.dark-theme .project-thumb.thumb-verteos .project-title {
   display: block;
 }
 
-.gallery-sequence-4 .gallery-grid-item {
-  aspect-ratio: 16 / 10;
-}
-
-.gallery-sequence-4 .gallery-grid-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.gallery-sequence-row .gallery-grid-item.story-scale-fix,
+.story-scale-fix {
+  overflow: hidden;
+  background-color: #000000 !important;
+  aspect-ratio: 9 / 16 !important;
 }
 
 @media (max-width: 768px) {
@@ -1027,6 +1023,50 @@ body.dark-theme .project-thumb.thumb-verteos .project-title {
   }
   .focus-carousel-card[data-pos="-1"] {
     transform: translate(calc(-50% - var(--side-offset)), -50%) scale(0.78);
+  }
+}
+
+/* VARIAÇÃO QUADRADA 1:1 DO CARROSSEL FOCUS (POSTS QUADRADOS DE FEED) */
+.focus-carousel.focus-carousel-square {
+  --card-width: 440px;
+  --card-height: 440px;
+  --side-offset: 280px;
+}
+
+.focus-carousel.focus-carousel-square .focus-carousel-stage {
+  height: 500px;
+}
+
+@media (max-width: 992px) {
+  .focus-carousel.focus-carousel-square {
+    --card-width: 360px;
+    --card-height: 360px;
+    --side-offset: 220px;
+  }
+  .focus-carousel.focus-carousel-square .focus-carousel-stage {
+    height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .focus-carousel.focus-carousel-square {
+    --card-width: 270px;
+    --card-height: 270px;
+    --side-offset: 155px;
+  }
+  .focus-carousel.focus-carousel-square .focus-carousel-stage {
+    height: 330px;
+  }
+}
+
+@media (max-width: 480px) {
+  .focus-carousel.focus-carousel-square {
+    --card-width: 220px;
+    --card-height: 220px;
+    --side-offset: 115px;
+  }
+  .focus-carousel.focus-carousel-square .focus-carousel-stage {
+    height: 280px;
   }
 }
 
