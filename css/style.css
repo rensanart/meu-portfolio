@@ -301,8 +301,8 @@ ul {
 }
 
 .project-thumb.thumb-verteos {
-  background-color: #ffffff !important;
-  border: 1px solid var(--border-color, #ebebeb);
+  background-color: #e8e8e8 !important;
+  border: 1px solid var(--border-color, #d8d8d8);
 }
 
 .project-thumb.thumb-verteos .project-title {
@@ -310,7 +310,12 @@ ul {
 }
 
 body.dark-theme .project-thumb.thumb-verteos {
-  border-color: #262626;
+  background-color: #242424 !important;
+  border-color: #383838;
+}
+
+body.dark-theme .project-thumb.thumb-verteos .project-title {
+  color: #ffffff !important;
 }
 
 /* OVERLAY DE TEXTO DENTRO DO CARD */
@@ -791,7 +796,6 @@ body.dark-theme .project-thumb.thumb-verteos {
   background-color: var(--text-color, #111111);
   color: var(--bg-color, #ffffff);
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 .focus-carousel-btn:active {
@@ -825,9 +829,8 @@ body.dark-theme .project-thumb.thumb-verteos {
   transform-origin: center center;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
               opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+              filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: none;
   border: 1px solid #111111;
   background-color: #ffffff;
   border-radius: 0;
@@ -852,7 +855,7 @@ body.dark-theme .project-thumb.thumb-verteos {
   z-index: 10;
   opacity: 1;
   filter: brightness(1);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
   cursor: zoom-in;
 }
 
@@ -862,7 +865,7 @@ body.dark-theme .project-thumb.thumb-verteos {
   z-index: 5;
   opacity: 0.6;
   filter: brightness(0.96);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   cursor: pointer;
 }
 
@@ -877,7 +880,7 @@ body.dark-theme .project-thumb.thumb-verteos {
   z-index: 5;
   opacity: 0.6;
   filter: brightness(0.96);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   cursor: pointer;
 }
 
@@ -1036,7 +1039,7 @@ body.dark-theme .focus-carousel-stage {
 body.dark-theme .focus-carousel-card {
   border-color: #333333;
   background-color: #141414;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 }
 
 body.dark-theme .focus-carousel-badge {
