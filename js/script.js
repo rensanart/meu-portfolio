@@ -252,6 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
       item.style.cursor = 'pointer';
       item.addEventListener('click', (e) => {
         if (e.target.tagName === 'A' && !e.target.classList.contains('gallery-grid-item')) return;
+        // Se for um card do focus-carousel e não for o central ativo (data-pos !== "0"), não abre o lightbox
+        if (item.classList.contains('focus-carousel-card') && item.getAttribute('data-pos') !== '0') {
+          return;
+        }
         e.preventDefault();
         openLightbox(index);
       });
@@ -760,5 +764,136 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ==========================================================================
+     CARROSSEL DE FOCO 3D / COVERFLOW (CARD CENTRAL EM DESTAQUE E LATERAIS ATRÁS)
+     ========================================================================== */
+  function initFocusCarousels() {
+    const carousels = document.querySelectorAll('.focus-carousel');
+    if (!carousels.length) return;
+
+    carousels.forEach(carousel => {
+      const cards = Array.from(carousel.querySelectorAll('.focus-carousel-card'));
+      const prevBtns = carousel.querySelectorAll('.prev-btn, .stage-prev');
+      const nextBtns = carousel.querySelectorAll('.next-btn, .stage-next');
+      const counter = carousel.querySelector('.focus-carousel-counter');
+      const dotsContainer = carousel.querySelector('.focus-carousel-dots');
+      const total = cards.length;
+      if (!total) return;
+
+      let activeIndex = 0;
+
+      // Cria indicadores (dots)
+      if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, idx) => {
+          const dot = document.createElement('button');
+          dot.className = `focus-carousel-dot ${idx === 0 ? 'active' : ''}`;
+          dot.setAttribute('type', 'button');
+          dot.setAttribute('aria-label', `Ir para slide ${idx + 1}`);
+          dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateCarousel(idx);
+          });
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      function updateCarousel(newIndex) {
+        activeIndex = (newIndex + total) % total;
+
+        // Atualiza contador textual (01 / 07)
+        if (counter) {
+          const curStr = String(activeIndex + 1).padStart(2, '0');
+          const totStr = String(total).padStart(2, '0');
+          counter.textContent = `${curStr} / ${totStr}`;
+        }
+
+        // Atualiza dots
+        if (dotsContainer) {
+          const dots = dotsContainer.querySelectorAll('.focus-carousel-dot');
+          dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === activeIndex);
+          });
+        }
+
+        // Posiciona cada carta calculando a menor distância circular
+        cards.forEach((card, i) => {
+          let diff = i - activeIndex;
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+
+          if (diff === 0) {
+            card.setAttribute('data-pos', '0');
+          } else if (diff === -1) {
+            card.setAttribute('data-pos', '-1');
+          } else if (diff === 1) {
+            card.setAttribute('data-pos', '1');
+          } else if (diff === -2) {
+            card.setAttribute('data-pos', '-2');
+          } else if (diff === 2) {
+            card.setAttribute('data-pos', '2');
+          } else {
+            card.setAttribute('data-pos', 'hidden');
+          }
+        });
+      }
+
+      // Eventos de clique nas setas
+      prevBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateCarousel(activeIndex - 1);
+        });
+      });
+
+      nextBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateCarousel(activeIndex + 1);
+        });
+      });
+
+      // Clique direto nas cartas laterais para rodar para ela
+      cards.forEach((card, idx) => {
+        card.addEventListener('click', (e) => {
+          const pos = card.getAttribute('data-pos');
+          if (pos === '-1') {
+            e.stopPropagation();
+            updateCarousel(activeIndex - 1);
+          } else if (pos === '1') {
+            e.stopPropagation();
+            updateCarousel(activeIndex + 1);
+          }
+        });
+      });
+
+      // Suporte a swipe por toque
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const stage = carousel.querySelector('.focus-carousel-stage');
+      if (stage) {
+        stage.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        stage.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          const delta = touchEndX - touchStartX;
+          if (Math.abs(delta) > 35) {
+            if (delta > 0) {
+              updateCarousel(activeIndex - 1);
+            } else {
+              updateCarousel(activeIndex + 1);
+            }
+          }
+        }, { passive: true });
+      }
+
+      // Inicializa na posição 0
+      updateCarousel(0);
+    });
+  }
+
+  initFocusCarousels();
   initHeaderWavesScroll();
 });
