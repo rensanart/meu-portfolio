@@ -1186,10 +1186,6 @@ body.dark-theme .avery-campaign-desc strong {
   margin: 20px auto 40px auto;
 }
 
-body.dark-theme .avery-logo-img {
-  filter: invert(1) brightness(1.2);
-}
-
 body.dark-theme .avery-campaign-badge {
   color: #ffffff;
 }
