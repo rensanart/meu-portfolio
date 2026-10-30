@@ -1119,6 +1119,74 @@ body.dark-theme .focus-carousel-dot.active {
   background: #ffffff;
 }
 
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS - PROJETO AVERY DENNISON
+   ========================================================================== */
+.avery-campaign-divider {
+  text-align: center;
+  margin: 70px auto 35px auto;
+  max-width: 860px;
+  width: 100%;
+}
+
+.avery-campaign-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-color, #111111);
+  margin-bottom: 14px;
+}
+
+.avery-campaign-badge::before {
+  content: '✶';
+  font-size: 0.85rem;
+  color: #e51937;
+}
+
+.avery-campaign-title {
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  color: var(--text-color, #111111);
+}
+
+.avery-campaign-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-color, #222222);
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+.avery-single-vertical {
+  max-width: 580px;
+  width: 100%;
+  margin: 20px auto 40px auto;
+}
+
+body.dark-theme .avery-logo-img {
+  filter: invert(1) brightness(1.2);
+}
+
+body.dark-theme .avery-campaign-badge {
+  color: #ffffff;
+}
+
+body.dark-theme .avery-campaign-title {
+  color: #ffffff;
+}
+
+body.dark-theme .avery-campaign-desc {
+  color: #cccccc;
+}
+
 .project-bottom-nav {
   display: flex;
   justify-content: space-between;
