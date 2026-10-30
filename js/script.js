@@ -713,8 +713,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollY = window.scrollY || window.pageYOffset || 0;
         const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
 
-        // Recolhe suavemente em direção ao centro da letra R (de 1.0 a 0.12)
-        const scale = 1 - (progress * 0.88);
+        // Base scale reduzida em 30% (de 1.0 para 0.70)
+        // Recolhe suavemente em direção ao centro da letra R (de 0.70 a 0.084)
+        const baseScale = 0.70;
+        const scale = baseScale * (1 - (progress * 0.88));
         // Diminui e some suavemente (de 1.0 a 0.0)
         const opacity = Math.max(0, 1 - progress * 1.15);
 

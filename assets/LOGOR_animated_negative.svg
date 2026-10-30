@@ -122,6 +122,7 @@
       }
       .header-waves-group {
         transform-origin: 660.95px 107.56px;
+        transform: scale(0.7);
         will-change: transform, opacity;
       }
     </style>
