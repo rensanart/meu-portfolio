@@ -1165,6 +1165,21 @@ body.dark-theme .focus-carousel-dot.active {
   font-weight: 400;
 }
 
+.avery-campaign-desc strong {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-color, #111111);
+  display: inline-block;
+  margin-top: 4px;
+}
+
+body.dark-theme .avery-campaign-desc strong {
+  color: #ffffff;
+}
+
 .avery-single-vertical {
   max-width: 580px;
   width: 100%;
