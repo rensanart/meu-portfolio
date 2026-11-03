@@ -357,8 +357,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
 
         if (data.success || response.ok) {
-          alert('Mensagem enviada com sucesso! Em breve Renan W. Santana (Ren-San) entrará em contato.');
+          btn.textContent = 'Enviado com sucesso! ✓';
+          btn.style.backgroundColor = '#10b981';
+          btn.style.borderColor = '#10b981';
+          btn.style.color = '#ffffff';
           contactForm.reset();
+          setTimeout(() => {
+            btn.textContent = originalBtnText;
+            btn.style.backgroundColor = '';
+            btn.style.borderColor = '';
+            btn.style.color = '';
+            btn.disabled = false;
+          }, 4000);
+          alert('Mensagem enviada com sucesso! Em breve Renan W. Santana (Ren-San) entrará em contato.');
+          return;
         } else {
           // Fallback para mailto se necessário
           const nome = formData.get('nome') || '';
