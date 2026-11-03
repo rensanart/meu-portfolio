@@ -254,6 +254,15 @@ ul {
   display: none !important;
 }
 
+@media (min-width: 769px) {
+  .project-card.project-card-centered {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: calc(50% - (var(--grid-gap) / 2));
+  }
+}
+
 .project-thumb {
   position: relative;
   width: 100%;

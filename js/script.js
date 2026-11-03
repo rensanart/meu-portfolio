@@ -48,6 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Centraliza o último card se o total de cards visíveis for ímpar no grid de 2 colunas
+    const visibleCards = Array.from(projectCards).filter(c => !c.classList.contains('hidden'));
+    projectCards.forEach(c => c.classList.remove('project-card-centered'));
+    if (visibleCards.length % 2 !== 0 && visibleCards.length > 1) {
+      visibleCards[visibleCards.length - 1].classList.add('project-card-centered');
+    }
+
     // Reproduz vídeos automaticamente ao entrar na aba de Motion
     if (isMotionFilter) {
       projectCards.forEach(card => {
