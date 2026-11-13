@@ -2373,6 +2373,8 @@ body.dark-theme .about-avatar-container {
   box-sizing: border-box;
   position: relative;
   z-index: 3;
+  transform: scale(1.02);
+  transform-origin: center center;
 }
 
 body.dark-theme .about-details h4 {
