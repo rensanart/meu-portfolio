@@ -191,6 +191,61 @@ ul {
 }
 
 /* ==========================================================================
+   SELETOR DE IDIOMA (PT / EN)
+   ========================================================================== */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  height: 32px;
+  padding: 0 2px;
+  background-color: transparent;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 3px 4px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.lang-btn:hover {
+  opacity: 0.85;
+}
+
+.lang-btn.active {
+  opacity: 1;
+  font-weight: 700;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.lang-divider {
+  font-size: 0.72rem;
+  opacity: 0.3;
+  user-select: none;
+  color: var(--text-color);
+  padding: 0 2px;
+  line-height: 1;
+}
+
+/* ==========================================================================
    FILTROS (TODOS, DIREÇÃO DE ARTE, ILUSTRAÇÃO)
    ========================================================================== */
 
@@ -1911,10 +1966,30 @@ body.dark-theme .about-photo-waves {
     justify-content: center !important;
     align-items: center !important;
     gap: 8px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
     padding: 0 !important;
     z-index: 10 !important;
+  }
+
+  .header-actions {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    z-index: 10 !important;
+  }
+
+  .lang-switch {
+    height: 28px !important;
+    padding: 0 2px !important;
+  }
+
+  .lang-btn {
+    font-size: 0.68rem !important;
+    padding: 2px 4px !important;
   }
 
   .social-links a {
@@ -2282,7 +2357,22 @@ body.dark-theme .about-signature {
 }
 
 body.dark-theme .about-photo-container {
+  background-color: #000000;
   border: 1px solid #222222;
+}
+
+.about-avatar-container,
+body.dark-theme .about-avatar-container {
+  background-color: #ffffff;
+  border: 1px solid #222222;
+}
+
+.about-avatar-svg {
+  object-fit: cover !important;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;
 }
 
 body.dark-theme .about-details h4 {

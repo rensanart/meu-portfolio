@@ -156,17 +156,24 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="index.html" class="nav-link active">Design</a>
-        <a href="ilustracoes.html" class="nav-link">Ilustrações</a>
-        <a href="#sobre" class="nav-link">Sobre</a>
-        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="index.html" class="nav-link active" data-i18n="nav.design">Design</a>
+        <a href="ilustracoes.html" class="nav-link" data-i18n="nav.illustrations">Ilustrações</a>
+        <a href="#sobre" class="nav-link" data-i18n="nav.about">Sobre</a>
+        <a href="contato.html" class="nav-link" data-i18n="nav.contact">Contato</a>
       </nav>
 
-      <div class="social-links">
-        <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
-        <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
-        <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
-        <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+      <div class="header-actions">
+        <div class="social-links">
+          <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
+          <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+          <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+          <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Seletor de idioma / Language selector">
+          <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">PT</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
       </div>
     </div>
   </header>
@@ -180,14 +187,14 @@
     <section id="projetos" class="projects-section">
       
       <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="social">Social Media</button>
-        <button class="filter-btn" data-filter="branding">Branding</button>
-        <button class="filter-btn" data-filter="motion">Motion</button>
+        <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Todos</button>
+        <button class="filter-btn" data-filter="social" data-i18n="filter.social">Social Media</button>
+        <button class="filter-btn" data-filter="branding" data-i18n="filter.branding">Branding</button>
+        <button class="filter-btn" data-filter="motion" data-i18n="filter.motion">Motion</button>
       </div>
 
       <!-- BARRA CONTÍNUA DE CLIENTES (MARQUEE TICKER COM LOGOS) -->
-      <div class="clients-ticker-wrap" aria-label="Clientes atendidos">
+      <div class="clients-ticker-wrap" aria-label="Clientes atendidos" data-i18n-title="ticker.aria">
         <div class="clients-ticker-track">
           <!-- GRUPO 1 -->
           <div class="clients-ticker-group">
@@ -329,7 +336,7 @@
           <div class="project-thumb">
             <img src="assets/images/vezzy/vezzy-1.png" alt="Identidade Redes Sociais • Vezzy">
             <div class="project-card-overlay">
-              <h3 class="project-title">Identidade Redes Sociais • Vezzy</h3>
+              <h3 class="project-title" data-i18n="card.vezzy_social.title">Identidade Redes Sociais • Vezzy</h3>
             </div>
           </div>
         </a>
@@ -339,7 +346,7 @@
           <div class="project-thumb">
             <img src="assets/images/upl/CAPAHOMEUPL.png" alt="Mídias Sociais • UPL 2023–2024">
             <div class="project-card-overlay">
-              <h3 class="project-title">Mídias Sociais • UPL 2023–2024</h3>
+              <h3 class="project-title" data-i18n="card.upl_social.title">Mídias Sociais • UPL 2023–2024</h3>
             </div>
           </div>
         </a>
@@ -349,7 +356,7 @@
           <div class="project-thumb">
             <img src="assets/images/cpfl/CAPA-CPFL.png?v=2" alt="Mídias Sociais • CPFL Soluções 2023–2024">
             <div class="project-card-overlay">
-              <h3 class="project-title">Mídias Sociais • CPFL Soluções 2023–2024</h3>
+              <h3 class="project-title" data-i18n="card.cpfl_social.title">Mídias Sociais • CPFL Soluções 2023–2024</h3>
             </div>
           </div>
         </a>
@@ -359,7 +366,7 @@
           <div class="project-thumb">
             <img src="assets/images/envo/CAPAENVO.png" alt="Envō Solar • Japan Festival 2020">
             <div class="project-card-overlay">
-              <h3 class="project-title">Envō Solar • Japan Festival 2020</h3>
+              <h3 class="project-title" data-i18n="card.envo.title">Envō Solar • Japan Festival 2020</h3>
             </div>
           </div>
         </a>
@@ -369,7 +376,7 @@
           <div class="project-thumb thumb-verteos">
             <img src="assets/VERTEOS/LOGO VERTEOS.gif" alt="Identidade & Branding • Vérteos">
             <div class="project-card-overlay">
-              <h3 class="project-title">Identidade & Branding • Vérteos</h3>
+              <h3 class="project-title" data-i18n="card.verteos.title">Identidade & Branding • Vérteos</h3>
             </div>
           </div>
         </a>
@@ -379,7 +386,7 @@
           <div class="project-thumb">
             <img src="assets/AVERY/CAPA-AVERY.png?v=3" alt="Direção de Arte & Campanhas • Avery Dennison">
             <div class="project-card-overlay">
-              <h3 class="project-title">Campanhas • Avery Dennison</h3>
+              <h3 class="project-title" data-i18n="card.avery.title">Campanhas • Avery Dennison</h3>
             </div>
           </div>
         </a>
@@ -389,7 +396,7 @@
           <div class="project-thumb">
             <img src="assets/VIda INC/CAPA-VIDA-INC.png?v=2" alt="Editorial & Branding • Vida Inc">
             <div class="project-card-overlay">
-              <h3 class="project-title">Editorial & Branding • Vida Inc</h3>
+              <h3 class="project-title" data-i18n="card.vida_inc.title">Editorial & Branding • Vida Inc</h3>
             </div>
           </div>
         </a>
@@ -401,7 +408,7 @@
               <source src="assets/images/vezzy/vezzy-video-2.mp4" type="video/mp4">
             </video>
             <div class="project-card-overlay">
-              <h3 class="project-title">Motion Graphics • Vezzy</h3>
+              <h3 class="project-title" data-i18n="card.motion_vezzy.title">Motion Graphics • Vezzy</h3>
             </div>
           </div>
         </a>
@@ -413,7 +420,7 @@
               <source src="assets/images/upl/upl-motion.mp4" type="video/mp4">
             </video>
             <div class="project-card-overlay">
-              <h3 class="project-title">Motion Design • UPL</h3>
+              <h3 class="project-title" data-i18n="card.motion_upl.title">Motion Design • UPL</h3>
             </div>
           </div>
         </a>
@@ -425,7 +432,7 @@
               <source src="assets/images/cpfl/cpfl-story-motion.mp4" type="video/mp4">
             </video>
             <div class="project-card-overlay">
-              <h3 class="project-title">Motion Stories • CPFL Soluções</h3>
+              <h3 class="project-title" data-i18n="card.motion_cpfl_story.title">Motion Stories • CPFL Soluções</h3>
             </div>
           </div>
         </a>
@@ -437,7 +444,7 @@
               <source src="assets/images/cpfl/cpfl-motion.mp4" type="video/mp4">
             </video>
             <div class="project-card-overlay">
-              <h3 class="project-title">Motion Feed • CPFL Soluções</h3>
+              <h3 class="project-title" data-i18n="card.motion_cpfl_feed.title">Motion Feed • CPFL Soluções</h3>
             </div>
           </div>
         </a>
@@ -487,8 +494,8 @@
 
           <!-- COLUNA DIREITA: TEXTO BIO & DETALHES -->
           <div class="about-text-content">
-            <h2>SOBRE</h2>
-            <p class="about-bio">
+            <h2 data-i18n="about.title">SOBRE</h2>
+            <p class="about-bio" data-i18n="about.bio">
               Olá! Sou o Renan — ou <strong>Ren-San</strong> no mundo online. Sou um criativo multimídia com uma certa obsessão por criar em múltiplos formatos: transito entre design, telas, movimento e novas mídias para testar linguagens em busca daquele impacto visual. Misturo experimentação estética com estratégia de design para posicionar marcas e solucionar desafios com projetos que não só chamam atenção na timeline, mas geram resultado de verdade e se destacam.
             </p>
             <div class="about-signature" style="font-size: 1.4rem; font-weight: 700; letter-spacing: 1.5px; margin-top: -20px; margin-bottom: 35px; color: var(--text-color);">
@@ -497,17 +504,17 @@
             
             <div class="about-details">
               <div class="services">
-                <h4>ESPECIALIDADES</h4>
+                <h4 data-i18n="about.specialties_title">ESPECIALIDADES</h4>
                 <ul>
-                  <li>Direção de Arte & Branding</li>
-                  <li>Identidade Visual para Redes Sociais</li>
-                  <li>Key Visuals & Campanhas</li>
-                  <li>Conceituação Digital & Motion</li>
+                  <li data-i18n="about.spec_1">Direção de Arte & Branding</li>
+                  <li data-i18n="about.spec_2">Identidade Visual para Redes Sociais</li>
+                  <li data-i18n="about.spec_3">Key Visuals & Campanhas</li>
+                  <li data-i18n="about.spec_4">Conceituação Digital & Motion</li>
                 </ul>
               </div>
 
               <div class="clients">
-                <h4>CLIENTES & PROJETOS</h4>
+                <h4 data-i18n="about.clients_title">CLIENTES & PROJETOS</h4>
                 <ul>
                   <li>Vezzy</li>
                   <li>UPL</li>
@@ -533,7 +540,7 @@
         <a href="index.html" class="footer-logo" aria-label="Logo Ren-San">
           <img src="assets/logo-r.svg" alt="R Logo" class="footer-logo-r">
         </a>
-        <p class="footer-role">Direção de Arte & Design</p>
+        <p class="footer-role" data-i18n="footer.role">Direção de Arte & Design</p>
       </div>
       
       <div class="footer-right">
@@ -543,7 +550,7 @@
           <a href="https://www.instagram.com/rensanart/" target="_blank">Instagram ↗</a>
           <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank">LinkedIn ↗</a>
         </div>
-        <p class="copyright">&copy; <span id="year"></span> Renan W. Santana (Ren-San) ✶ Todos os direitos reservados.</p>
+        <p class="copyright">&copy; <span id="year"></span> Renan W. Santana (Ren-San) ✶ <span data-i18n="footer.rights">Todos os direitos reservados.</span></p>
       </div>
     </div>
 
@@ -551,7 +558,7 @@
          EASTER EGG: PÁGINA DOBRADA / PROJETO SECRETO TCC (O REI DE AMARELO)
          ========================================== -->
     <aside class="easter-egg-peel" aria-label="Easter egg: Projeto Secreto TCC">
-      <a href="projeto-tcc.html" class="peel-link" title="Clique para virar a página e revelar o Projeto Secreto (TCC)" aria-label="Clique para virar a página e revelar o Projeto Secreto (TCC)">
+      <a href="projeto-tcc.html" class="peel-link" title="Clique para virar a página e revelar o Projeto Secreto (TCC)" aria-label="Clique para virar a página e revelar o Projeto Secreto (TCC)" data-i18n-title="easter_egg.title">
         <svg class="page-peel-svg" viewBox="0 0 80 185" width="80" height="185" aria-hidden="true">
           <defs>
             <!-- Sombra suave realista do papel dobrado -->
@@ -594,6 +601,8 @@
     </aside>
   </footer>
 
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

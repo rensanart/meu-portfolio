@@ -18,17 +18,24 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="index.html" class="nav-link active">Design</a>
-        <a href="ilustracoes.html" class="nav-link">Ilustrações</a>
-        <a href="index.html#sobre" class="nav-link">Sobre</a>
-        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="index.html" class="nav-link active" data-i18n="nav.design">Design</a>
+        <a href="ilustracoes.html" class="nav-link" data-i18n="nav.illustrations">Ilustrações</a>
+        <a href="index.html#sobre" class="nav-link" data-i18n="nav.about">Sobre</a>
+        <a href="contato.html" class="nav-link" data-i18n="nav.contact">Contato</a>
       </nav>
 
-      <div class="social-links">
-        <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
-        <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
-        <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
-        <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+      <div class="header-actions">
+        <div class="social-links">
+          <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
+          <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+          <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+          <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Seletor de idioma / Language selector">
+          <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">PT</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
       </div>
     </div>
   </header>
@@ -36,7 +43,7 @@
   <!-- CONTEÚDO PRINCIPAL DO PROJETO UPL (ESTRUTURA LIMPA IDÊNTICA À VEZZY) -->
   <main class="project-detail-container">
     
-    <a href="index.html" class="back-link">← Voltar ao portfólio</a>
+    <a href="index.html" class="back-link" data-i18n="project.back_home">← Voltar ao portfólio</a>
 
     <!-- 1. IMAGEM CENTRALIZADA (LOGO TEMA DO PROJETO) -->
     <header class="project-hero-header">
@@ -46,21 +53,21 @@
 
       <!-- 2. TEXTO RESUMINDO ABAIXO (CASE STUDY) -->
       <div class="project-summary-text project-case-summary">
-        <h2 class="project-case-title">UPL • Mídias Sociais &amp; Motion (2023–2024)</h2>
+        <h2 class="project-case-title" data-i18n="upl.title">UPL • Mídias Sociais &amp; Motion (2023–2024)</h2>
         <div class="project-case-body">
           <p class="project-case-item">
-            <strong>O Desafio:</strong> Sustentar um alto volume de postagens com unidade visual e conteúdo relevante, sem cair na repetição de produtos ou na linguagem engessada do agronegócio.
+            <strong data-i18n="case.label_challenge">O Desafio:</strong> <span data-i18n="upl.challenge">Sustentar um alto volume de postagens com unidade visual e conteúdo relevante, sem cair na repetição de produtos ou na linguagem engessada do agronegócio.</span>
           </p>
           <p class="project-case-item">
-            <strong>A Solução:</strong> Uso estratégico do guia global como base para um sistema visual proprietário, unindo direção de arte e motion design. Entre as entregas mais complexas, liderei de ponta a ponta a produção de um clipe musical para o Dia do Agricultor — atuando na captação, edição, sincronização e animação, demonstrando minha capacidade de resolver demandas de forma multidisciplinar.
+            <strong data-i18n="case.label_solution">A Solução:</strong> <span data-i18n="upl.solution">Uso estratégico do guia global como base para um sistema visual proprietário, unindo direção de arte e motion design. Entre as entregas mais complexas, liderei de ponta a ponta a produção de um clipe musical para o Dia do Agricultor — atuando na captação, edição, sincronização e animação, demonstrando minha capacidade de resolver demandas de forma multidisciplinar.</span>
           </p>
           <p class="project-case-item">
-            <strong>O Resultado:</strong> Consistência estética e narrativa mantidas em escala contínua, fortalecendo a autoridade da marca no setor e entregando projetos especiais complexos com agilidade e qualidade técnica.
+            <strong data-i18n="case.label_result">O Resultado:</strong> <span data-i18n="upl.result">Consistência estética e narrativa mantidas em escala contínua, fortalecendo a autoridade da marca no setor e entregando projetos especiais complexos com agilidade e qualidade técnica.</span>
           </p>
         </div>
         <div class="project-case-cta">
-          <p class="project-case-prompt">Precisa de soluções visuais completas e multidisciplinares para sua marca?</p>
-          <a href="#contato" class="project-case-btn">Fale comigo →</a>
+          <p class="project-case-prompt" data-i18n="upl.cta_prompt">Precisa de soluções visuais completas e multidisciplinares para sua marca?</p>
+          <a href="contato.html" class="project-case-btn" data-i18n="upl.cta_btn">Fale comigo →</a>
         </div>
       </div>
     </header>
@@ -325,6 +332,8 @@
     </div>
   </footer>
 
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

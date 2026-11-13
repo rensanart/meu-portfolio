@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ren-San ✶ | Ilustrações Autorais & Concept Art</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon-r.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body class="dark-theme">
 
@@ -18,17 +18,24 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="index.html" class="nav-link">Design</a>
-        <a href="ilustracoes.html" class="nav-link active">Ilustrações</a>
-        <a href="index.html#sobre" class="nav-link">Sobre</a>
-        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="index.html" class="nav-link" data-i18n="nav.design">Design</a>
+        <a href="ilustracoes.html" class="nav-link active" data-i18n="nav.illustrations">Ilustrações</a>
+        <a href="index.html#sobre" class="nav-link" data-i18n="nav.about">Sobre</a>
+        <a href="contato.html" class="nav-link" data-i18n="nav.contact">Contato</a>
       </nav>
 
-      <div class="social-links">
-        <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
-        <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
-        <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
-        <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+      <div class="header-actions">
+        <div class="social-links">
+          <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
+          <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+          <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+          <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Seletor de idioma / Language selector">
+          <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">PT</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
       </div>
     </div>
   </header>
@@ -193,10 +200,9 @@
         
         <div class="about-layout">
           
-          <!-- COLUNA ESQUERDA: FOTO DO REN (GIF ANIMADO) -->
-          <div class="about-photo-container">
-            <img src="assets/images/perfil-pic.gif" alt="Foto Renan W. Santana (Ren-San)" class="about-photo">
-            <img src="assets/logo_waves_animated.svg" alt="Forma do logo animada" class="about-photo-waves">
+          <!-- COLUNA ESQUERDA: AVATAR HERO TURN 360° SVG -->
+          <div class="about-photo-container about-avatar-container">
+            <img src="EU/avatar_hero_turn.svg?v=5" alt="Avatar 360° Hero Turn Renan W. Santana (Ren-San)" class="about-photo about-avatar-svg">
           </div>
 
           <!-- COLUNA DIREITA: TEXTO BIO & DETALHES -->
@@ -306,6 +312,8 @@
     </aside>
   </footer>
 
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

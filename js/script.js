@@ -1,4 +1,20 @@
 // ==========================================
+// INTERNACIONALIZAÇÃO (i18n - PT / EN)
+// ==========================================
+if (!window.PORTFOLIO_TRANSLATIONS && !document.querySelector('script[src*="translations.js"]')) {
+  const transScript = document.createElement('script');
+  transScript.src = 'js/translations.js';
+  transScript.async = false;
+  document.head.appendChild(transScript);
+}
+if (!window.portfolioI18n && !document.querySelector('script[src*="i18n.js"]')) {
+  const i18nScript = document.createElement('script');
+  i18nScript.src = 'js/i18n.js';
+  i18nScript.async = false;
+  document.head.appendChild(i18nScript);
+}
+
+// ==========================================
 // RASTREAMENTO ANALÍTICO INVISÍVEL
 // ==========================================
 if (!document.querySelector('script[src*="analytics.js"]')) {

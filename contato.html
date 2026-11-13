@@ -18,17 +18,24 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="index.html" class="nav-link">Design</a>
-        <a href="ilustracoes.html" class="nav-link">Ilustrações</a>
-        <a href="index.html#sobre" class="nav-link">Sobre</a>
-        <a href="contato.html" class="nav-link active">Contato</a>
+        <a href="index.html" class="nav-link" data-i18n="nav.design">Design</a>
+        <a href="ilustracoes.html" class="nav-link" data-i18n="nav.illustrations">Ilustrações</a>
+        <a href="index.html#sobre" class="nav-link" data-i18n="nav.about">Sobre</a>
+        <a href="contato.html" class="nav-link active" data-i18n="nav.contact">Contato</a>
       </nav>
 
-      <div class="social-links">
-        <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
-        <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
-        <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
-        <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+      <div class="header-actions">
+        <div class="social-links">
+          <a href="https://cara.app/rensan" target="_blank" aria-label="Cara.app">Ca</a>
+          <a href="https://www.behance.net/rennsant" target="_blank" aria-label="Behance">Be</a>
+          <a href="https://www.instagram.com/rensanart/" target="_blank" aria-label="Instagram">Ig</a>
+          <a href="https://www.linkedin.com/in/renan-santana-4514b31b9/" target="_blank" aria-label="LinkedIn">In</a>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Seletor de idioma / Language selector">
+          <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">PT</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
       </div>
     </div>
   </header>
@@ -39,7 +46,7 @@
     <!-- BARRA INFORMATIVA SUPERIOR (ESTILO MATHI MÜLLER) -->
     <div class="contact-info-top">
       <div class="info-row">
-        <span class="info-badge">Brasil</span>
+        <span class="info-badge" data-i18n="contact.country">Brasil</span>
         <span class="info-badge">2026</span>
       </div>
 
@@ -61,37 +68,37 @@
       <!-- NOME E SOBRENOME (SIDE BY SIDE) -->
       <div class="form-grid-2">
         <div class="form-group">
-          <span class="form-label-badge">Nome</span>
-          <input type="text" name="nome" class="form-input-line" placeholder="Seu nome" required>
+          <span class="form-label-badge" data-i18n="contact.name_label">Nome</span>
+          <input type="text" name="nome" class="form-input-line" placeholder="Seu nome" data-i18n-placeholder="contact.name_placeholder" required>
         </div>
 
         <div class="form-group">
-          <span class="form-label-badge">Sobrenome</span>
-          <input type="text" name="sobrenome" class="form-input-line" placeholder="Seu sobrenome">
+          <span class="form-label-badge" data-i18n="contact.lastname_label">Sobrenome</span>
+          <input type="text" name="sobrenome" class="form-input-line" placeholder="Seu sobrenome" data-i18n-placeholder="contact.lastname_placeholder">
         </div>
       </div>
 
       <!-- EMAIL E TELEFONE / WHATSAPP (SIDE BY SIDE) -->
       <div class="form-grid-2">
         <div class="form-group">
-          <span class="form-label-badge">E-mail *</span>
-          <input type="email" name="email" class="form-input-line" placeholder="seuemail@exemplo.com" required>
+          <span class="form-label-badge" data-i18n="contact.email_label">E-mail *</span>
+          <input type="email" name="email" class="form-input-line" placeholder="seuemail@exemplo.com" data-i18n-placeholder="contact.email_placeholder" required>
         </div>
 
         <div class="form-group">
-          <span class="form-label-badge">Telefone / WhatsApp</span>
-          <input type="tel" name="telefone" class="form-input-line" placeholder="(19) 99999-9999">
+          <span class="form-label-badge" data-i18n="contact.phone_label">Telefone / WhatsApp</span>
+          <input type="tel" name="telefone" class="form-input-line" placeholder="(19) 99999-9999" data-i18n-placeholder="contact.phone_placeholder">
         </div>
       </div>
 
       <!-- MENSAGEM -->
       <div class="form-group">
-        <span class="form-label-badge">Mensagem</span>
-        <textarea name="mensagem" class="form-input-line" rows="3" placeholder="Escreva sua mensagem aqui..." required></textarea>
+        <span class="form-label-badge" data-i18n="contact.message_label">Mensagem</span>
+        <textarea name="mensagem" class="form-input-line" rows="3" placeholder="Escreva sua mensagem aqui..." data-i18n-placeholder="contact.message_placeholder" required></textarea>
       </div>
 
       <!-- BOTÃO ENVIAR PRETO E RETO -->
-      <button type="submit" class="btn-submit-pill">Enviar</button>
+      <button type="submit" class="btn-submit-pill" data-i18n="contact.submit_btn">Enviar</button>
 
     </form>
 
@@ -115,13 +122,15 @@
       </div>
 
       <div class="footer-right-content">
-        <p>© <span id="year"></span> Renan W. Santana (Ren-San). Todos os direitos reservados.</p>
-        <a href="#" class="back-top">VOLTAR AO TOPO ↑</a>
+        <p>© <span id="year"></span> Renan W. Santana (Ren-San). <span data-i18n="footer.rights">Todos os direitos reservados.</span></p>
+        <a href="#" class="back-top" data-i18n="footer.back_to_top">VOLTAR AO TOPO ↑</a>
       </div>
 
     </div>
   </footer>
 
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
